@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html  class="no-js" lang="Fa_IR" dir="rtl">
 <head>
     @include('customer.layouts.head-tag')
     @yield('head-tag')
