@@ -1,108 +1,114 @@
 @extends('customer.layouts.master-simple')
 
-@section('head-tag')
 
-<style>
-    #resend-otp{
-        font-size: 1rem;
-    }
-</style>
-
-@endsection
 
 @section('content')
 
+<body style="background: url('/customer-assets/img/bg-auth.jpg');background-repeat: no-repeat;background-size: cover">
 
-<section class="vh-100 d-flex justify-content-center align-items-center pb-5">
-    <form action="{{ route('auth.customer.login-confirm', $token) }}" method="post">
-        @csrf
-    <section class="login-wrapper mb-5">
-        <section class="login-logo">
-            <img src="{{ asset('customer-assets/images/logo/4.png') }}" alt="">
-        </section>
-        <section class="login-title mb-2">
-            <a href="{{ route('auth.customer.login-register-form') }}">
-                <i class="fa fa-arrow-right"></i>
-            </a>
-        </section>
-          <section class="login-title">
-            کد تایید را وارد نمایید
-        </section>
 
-        @if($otp->type == 0)
-        <section class="login-info">
-            کد تایید برای شماره موبایل {{ $otp->login_id }} ارسال گردید
-        </section>
-        @else
-        <section class="login-info">
-            کد تایید برای ایمیل {{ $otp->login_id }} ارسال گردید
-        </section>
-        @endif
-        <section class="login-input-text">
-            <input type="text" name="otp" value="{{ old('otp') }}">
-            @error('otp')
-            <span class="alert_required bg-danger text-white p-1 rounded" role="alert">
-                <strong>
-                    {{ $message }}
-                </strong>
-            </span>
-        @enderror
-        </section>
-        <section class="login-btn d-grid g-2"><button class="btn btn-danger">تایید</button></section>
+    <!-- start content -->
 
-        <section id="resend-otp" class="d-none">
-            <a href="{{ route('auth.customer.login-resend-otp', $token) }}" class="text-decoration-none text-primary">دریافت مجدد کد تایید</a>
-        </section>
-        <section id="timer"></section>
+    <div class="content vh-100">
+        <div class="container-fluid h-100">
+            <div class="auth h-100 d-flex align-items-center">
+                <div class="container-fluid">
+                    <div class="auth-items">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-4">
 
-    </section>
-    </form>
-</section>
+                                <div class="auth-logo text-center">
+                                    <a href="">
+                                        <img src="assets/img/logo.png" width="200" alt="">
+                                    </a>
+                                </div>
+                                <div class="auth-form shadow-xl rounded-3 bg-white">
+                                    <div class="auth-form-title mb-4 slider-title-desc-center">
+                                        <h2 class="text-center h4 text-muted title-font">ورود / ثبت نام</h2>
+                                    </div>
+                                    <form action="{{ route('auth.customer.login-confirm', $token) }}" method="post">
+                                        @csrf
 
+                                        <div class="alert text-center alert-success">
+                                            یک کد برای شما پیامک شد لطفا آن را وارد کنید
+                                        </div>
+
+                                        <div id="otp-input">
+                                            <input placeholder="_" type="number" step="1" min="0" max="9" autocomplete="no" pattern="\d*" />
+                                            <input placeholder="_" type="number" step="1" min="0" max="9" autocomplete="no" pattern="\d*" />
+                                            <input placeholder="_" type="number" step="1" min="0" max="9" autocomplete="no" pattern="\d*" />
+                                            <input placeholder="_" type="number" step="1" min="0" max="9" autocomplete="no" pattern="\d*" />
+                                            <input placeholder="_" type="number" step="1" min="0" max="9" autocomplete="no" pattern="\d*" />
+                                            <input placeholder="_" type="number" step="1" min="0" max="9" autocomplete="no" pattern="\d*" />
+                                            <input id="otp-value" placeholder="_" type="hidden" name="otp" />
+                                        </div>
+
+
+                                        <!-- Countdown timer html -->
+                                        <div class="countDownContainer">
+                                            <div class="countdown-bar" id="countdownB">
+                                                <div></div>
+                                                <div></div>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="form-group mt-3">
+                                            <button type="submit" id="submit" class="btn btn-success w-100 mt-4 btn-login">وورد به
+                                                سایت
+                                            </button>
+                                        </div>
+                                    </form>
+
+
+                                </div>
+
+                                <p class="loginTermsDesc">با ورود و یا ثبت نام در شاهان شما <a class="underlined main-color-one-color fw-bold"
+                                        href="/rules/">شرایط و
+                                        قوانین</a> استفاده از سرویس‌های سایت شاهان و <a class="underlined main-color-one-color fw-bold"
+                                        href="/privacy-polices/">قوانین حریم
+                                        خصوصی</a> آن را می‌پذیرید.</p>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</body>
+<!-- end content -->
 
 @endsection
 
-
 @section('script')
 
-@php
-    $timer = ((new \Carbon\Carbon($otp->created_at))->addMinutes(5)->timestamp - \Carbon\Carbon::now()->timestamp) * 1000;
-@endphp
+
+<!-- Run Countdown Timer Script -->
+<script type="text/javascript">
+    $(document).ready(function() {
+
+        countdown('countdownB', 0, 0, 0, 50);
+    });
+</script>
+<!-- End script -->
+
+<!-- otp input callback -->
+
 
 <script>
-
-   var countDownDate = new Date().getTime() + {{ $timer }};
-    var timer = $('#timer');
-    var resendOtp = $('#resend-otp');
-
-    var x = setInterval(function(){
-
-        var now = new Date().getTime();
-
-        var distance = countDownDate - now;
-
-        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-        if(minutes == 0){
-            timer.html('ارسال مجدد کد تایید تا ' + seconds + 'ثانیه دیگر')
-        }
-        else{
-            timer.html('ارسال مجدد کد تایید تا ' + minutes + 'دقیقه و ' + seconds + 'ثانیه دیگر');
-        }
-        if(distance < 0)
-        {
-            clearInterval(x);
-            timer.addClass('d-none');
-            resendOtp.removeClass('d-none');
-        }
-
-    }, 1000)
-
-
-
-
-
+    const continueButton = document.querySelector("#submit");
+    continueButton.addEventListener("click", (e) => {
+        updateValue(inputs);
+    });
 </script>
+
+<!-- end otp input callback -->
+
+
+
 
 @endsection

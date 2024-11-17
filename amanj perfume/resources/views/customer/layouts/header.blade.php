@@ -32,9 +32,27 @@
                             <span id="cartCounter" class="cart-counter">0</span>
                         </a>
                     </div>
+                    @auth
+                        <button class="btn btn-link text-decoration-none text-dark dropdown-toggle profile-button" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fa fa-user"></i>
+                        </button>
+                        <section class="dropdown-menu dropdown-menu-end custom-drop-down" aria-labelledby="dropdownMenuButton1">
+                            <section><a class="dropdown-item" href="{{ route('customer.profile.profile') }}"><i class="fa fa-user-circle"></i>پروفایل کاربری</a></section>
+                            <section><a class="dropdown-item" href="#"><i class="fa fa-newspaper"></i>سفارشات</a></section>
+                            <section><a class="dropdown-item" href="#"><i class="fa fa-heart"></i>لیست علاقه مندی</a></section>
+                            <section>
+                                <hr class="dropdown-divider">
+                            </section>
+                            <section><a class="dropdown-item" href="{{ route('auth.customer.logout') }}"><i class="fa fa-sign-out-alt"></i>خروج</a>
+                            </section>
+
+                        </section>
+                        @endauth
+                    @guest
                     <div class="header-btn-login d-lg-block d-none">
-                        <a href="" class="btn"><i class="bi bi-person-fill"></i> ورود / ثبت نام</a>
+                        <a href="{{ route('auth.customer.login-register-form') }}" class="btn"><i class="bi bi-person-fill"></i> ورود / ثبت نام</a>
                     </div>
+                    @endguest
                     <div class="header-btn-login-responsive d-lg-none d-block">
                         <a href="" class="btn"><i class="bi bi-person-fill fs-2"></i></a>
                     </div>

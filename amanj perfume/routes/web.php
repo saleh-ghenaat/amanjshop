@@ -39,11 +39,13 @@ use App\Http\Controllers\Admin\Ticket\TicketPriorityController;
 use App\Http\Controllers\Auth\Customer\LoginRegisterController;
 use App\Http\Controllers\Customer\SalesProcess\AddressController;
 use App\Http\Controllers\Customer\SalesProcess\ProfileCompletionController;
+use App\Http\Controllers\Customer\Profile\OrderController as ProfileOrderController;
 use App\Http\Controllers\Customer\SalesProcess\PaymentController as CustomerPaymentController;
 use App\Http\Controllers\Admin\Content\CommentController as ContentCommentController;
 use App\Http\Controllers\Customer\Market\ProductController as MarketProductController;
 use App\Http\Controllers\Admin\Content\CategoryController as ContentCategoryController;
-
+use App\Http\Controllers\Customer\Profile\FavoriteController;
+use App\Http\Controllers\Customer\Profile\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -444,6 +446,16 @@ Route::namespace ('Auth')->group(function () {
 
 Route::get('/', [HomeController::class, 'home'])->name('customer.home');
 
+Route::namespace('Profile')->group(function () {
+    
+    Route::get('/profile', [ProfileController::class, 'index'])->name('customer.profile.profile');
+    Route::get('/edit-profile', [ProfileController::class, 'edit'])->name('customer.profile.edit-profile');
+    Route::get('/update-profile', [ProfileController::class, 'update'])->name('customer.profile.profile.update');
+    Route::get('/orders', [ProfileOrderController::class, 'index'])->name('customer.profile.orders');
+    Route::get('/order-item/{order}', [ProfileOrderController::class, 'show'])->name('customer.profile.order-item');
+    Route::get('/my-favorites', [FavoriteController::class, 'index'])->name('customer.profile.my-favorites'); 
+
+});
 Route::namespace ('SalesProcess')->group(function () {
 
     //cart

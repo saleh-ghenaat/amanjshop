@@ -8,3 +8,5 @@
 <script src="{{ asset('customer-assets/js/plugin/bootstrap-touchspin/jquery.bootstrap-touchspin.min.js') }}"></script>
 <script src="{{ asset('customer-assets/js/plugins.js') }}"></script>
 <script src="{{ asset('customer-assets/js/main.js') }}"></script>
+<script src="{{asset ('customer-assets/js/plugin/otp-sms/otp-input.js')}}"></script>
+<script src="{{asset ('customer-assets/js/plugin/otp-loader/script.js')}}"></script>
