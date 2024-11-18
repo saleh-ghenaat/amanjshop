@@ -1,205 +1,306 @@
-@extends('customer.layouts.master-two-col')
+@extends('customer.layouts.master-one-col')
 
 @section('head-tag')
-    <title>پرداخت</title>
+<title>صورتحساب</title>
 @endsection
 
 
 @section('content')
 
-    <!-- start cart -->
-    <section class="mb-4">
-        <section class="container-xxl" >
-            <section class="row">
-                @if ($errors->any())
+
+
+<!-- start content -->
+
+<!-- start breadcroumb -->
+
+<div class="bread-crumb py-4">
+    <div class="container-fluid">
+        <nav aria-label="breadcrumb" class="my-lg-0 my-2">
+            <ol class="breadcrumb mb-0">
+                <li class="breadcrumb-item"><a href="{{route('customer.home')}}" class="font-14 text-muted-two">خانه</a></li>
+
+                <li class="breadcrumb-item active main-color-one-color font-14 fw-bold" aria-current="page"> صورتحساب
+                </li>
+            </ol>
+        </nav>
+    </div>
+</div>
+
+<!-- end breadcroumb -->
+
+
+<div class="content">
+    <div class="container-fluid">
+
+        <div class="payment_navigtions">
+            <div class="checkout-headers cart">
                 <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
+                    <li class="nav">
+                        <a href="">
+                            <i class="bi bi-cart"></i>
+                            <p>سبد خرید</p>
+                        </a>
+                    </li>
+                    <li class="nav active">
+                        <a href="">
+                            <i class="bi bi-truck"></i>
+                            <p>صورتحساب</p>
+                        </a>
+                    </li>
+                    <li class="nav">
+                        <i class="bi bi-card-list"></i>
+                        <p>فاکتور</p>
+                    </li>
                 </ul>
-            @endif
-                <section class="col">
-                    <!-- start vontent header -->
-                    <section class="content-header">
-                        <section class="d-flex justify-content-between align-items-center">
-                            <h2 class="content-header-title">
-                                <span>انتخاب نوع پرداخت </span>
-                            </h2>
-                            <section class="content-header-link">
-                                <!--<a href="#">مشاهده همه</a>-->
-                            </section>
-                        </section>
-                    </section>
+            </div>
 
-                    <section class="row mt-4">
-                        <section class="col-md-9">
-                            <section class="content-wrapper bg-white p-3 rounded-2 mb-4">
+        </div>
 
-                                <!-- start vontent header -->
-                                <section class="content-header mb-3">
-                                    <section class="d-flex justify-content-between align-items-center">
-                                        <h2 class="content-header-title content-header-title-small">
-                                            کد تخفیف
-                                        </h2>
-                                        <section class="content-header-link">
-                                            <!--<a href="#">مشاهده همه</a>-->
-                                        </section>
-                                    </section>
-                                </section>
+    </div>
 
-                                <section class="payment-alert alert alert-primary d-flex align-items-center p-2" role="alert">
-                                    <i class="fa fa-info-circle flex-shrink-0 me-2"></i>
-                                    <secrion>
-                                        کد تخفیف خود را در این بخش وارد کنید.
-                                    </secrion>
-                                </section>
+    <div class="container-fluid">
+        <div class="slider-title mb-4">
+            <div class="slider-title-desc">
+                <div class="slider-title-title">
+                    <h2 class="h1"> جزئیات <span class="title-font main-color-one-color">صورت حساب</span></h2>
+                </div>
+            </div>
+        </div>
+        <div class="content-box checkouts-form">
+            <div class="container-fluid">
+                <div class="checkout-form">
+                    <form action="{{route('customer.sales-process.factor')}}">
 
-                                <section class="row">
-                                    <section class="col-md-5">
-                                        <form action="{{ route('customer.sales-process.copan-discount') }}" method="post">
-                                            @csrf
-                                        <section class="input-group input-group-sm">
-                                                <input type="text" name="copan" class="form-control" placeholder="کد تخفیف را وارد کنید">
-                                                <button class="btn btn-primary" type="submit">اعمال کد</button>
-                                        </section>
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <div class="comment-item mb-3">
+                                    <input type="text" class="form-control" id="floatingInputName" placeholder="نام خود را وارد کنید...">
+                                    <label for="floatingInputName" class="form-label label-float fw-bold font-16">نام <span class="text-danger">*</span></label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="comment-item mb-3">
+                                    <input type="text" class="form-control" id="floatingInputLName" placeholder="نام خانوادگی خود را وارد کنید ...">
+                                    <label for="floatingInputLName" class="form-label label-float fw-bold">نام خانوادگی <span class="text-danger">*</span></label>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="comment-item mb-3">
+                                    <input type="text" class="form-control" id="floatingInputStreet" placeholder="نام خانوادگی خود را وارد کنید ...">
+                                    <label for="floatingInputStreet" class="form-label label-float fw-bold">آدرس خیابان</label>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="comment-item" for="floatingInputOstan">
+                                    <label class="label-float fw-bold">استان <span class="text-danger">*</span></label>
+                                    <form action="">
+                                        <select name="" id="floatingInputOstan" class="form-select">
+                                            <option value="">تهران</option>
+                                            <option value="">اصفهان</option>
+                                            <option value="">مشهد</option>
+                                            <option value="">شیراز</option>
+                                        </select>
                                     </form>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="comment-item">
+                                    <label class="label-float fw-bold" for="floatingInputCity">شهر <span class="text-danger">*</span></label>
+                                    <form action="">
+                                        <select name="" id="floatingInputCity" class="form-select">
+                                            <option value="">کرج</option>
+                                            <option value="">خرم آباد</option>
+                                            <option value="">نور آباد</option>
+                                            <option value="">الشتر</option>
+                                        </select>
+                                    </form>
+                                </div>
+                            </div>
 
-                                    </section>
+                            <div class="col-12">
+                                <div class="comment-item mb-3">
+                                    <input type="text" class="form-control" id="floatingInputTel" placeholder="شماره تلفن خود را وارد کنید ...">
+                                    <label for="floatingInputTel" class="form-label label-float fw-bold">شماره تلفن</label>
+                                </div>
+                            </div>
 
-                                </section>
-                            </section>
+                            <div class="col-12">
+                                <div class="comment-item mb-3">
+                                    <textarea class="form-control py-3" id="floatingInputDesc" rows="5" placeholder="اگر سفارش شما توضیح خاصی دارد اینجا وارد کنید"></textarea>
+                                    <label for="floatingInputDesc" class="form-label label-float fw-bold">توضیحات سفارش</label>
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <div class="cart-canvases position-sticky top-0">
+
+                                    <div class="item shadow-none">
+                                        <div class="factor">
+
+                                            <div class="factor-item pb-3">
+                                                <h5 class="title-font mb-3 h6">زمان ارسال</h5>
+                                                <div class="row gy-3">
+                                                    <div class="col-sm-2">
+                                                        <div class="send-item active">
+                                                            <h6 class="font-14 text-center">یک شنبه</h6>
+                                                            <p class="font-14 text-center mt-1 mb-0 text-muted">4 تیر ماه</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-2">
+                                                        <div class="send-item">
+                                                            <h6 class="font-14 text-center">دو شنبه</h6>
+                                                            <p class="font-14 text-center mt-1 mb-0 text-muted">6 تیر ماه</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-2">
+                                                        <div class="send-item">
+                                                            <h6 class="font-14 text-center">سه شنبه</h6>
+                                                            <p class="font-14 text-center mt-1 mb-0 text-muted">7 تیر ماه</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-2">
+                                                        <div class="send-item">
+                                                            <h6 class="font-14 text-center">چهار شنبه</h6>
+                                                            <p class="font-14 text-center mt-1 mb-0 text-muted">8 تیر ماه</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-2">
+                                                        <div class="send-item">
+                                                            <h6 class="font-14 text-center">پنج شنبه</h6>
+                                                            <p class="font-14 text-center mt-1 mb-0 text-muted">9 تیر ماه</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-2">
+                                                        <div class="send-item">
+                                                            <h6 class="font-14 text-center">شنبه</h6>
+                                                            <p class="font-14 text-center mt-1 mb-0 text-muted">15 تیر ماه</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="factor-item pb-3">
+                                                <h5 class="title-font mb-3 h6">شیوه پرداخت</h5>
+                                                <div class="row gy-3">
+                                                    <div class="col-sm-6">
+                                                        <div class="bank-item">
+                                                            <i class="bi bi-credit-card-2-back main-color-one-color"></i>
+                                                            <h6 class="font-14 mx-2">انتقال مستقیم بانکی</h6>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <div class="bank-item active">
+                                                            <i class="bi bi-house-fill main-color-one-color"></i>
+                                                            <h6 class="font-14 mx-2">پرداخت هنگام دریافت</h6>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="d-flex factor-item mb-3 align-items-center justify-content-between">
+                                                <h5 class="title-font mb-0 h6">قیمت کالا ها</h5>
+                                                <p class="mb-0 font-17">1,228,000 تومان</p>
+                                            </div>
+
+                                            <div class="d-flex factor-item mb-3 align-items-center justify-content-between">
+                                                <h5 class="title-font mb-0 h6">تخفیف کالا ها</h5>
+                                                <p class="mb-0 font-18">1,296,000 تومان</p>
+                                            </div>
+
+                                            <div class="d-flex factor-item flex-column mb-3 align-items-start justify-content-between">
+                                                <h5 class="title-font mb-0 h6">حمل و نقل</h5>
+                                                <form action="">
+                                                    <div class="form-check mt-3">
+                                                        <input type="radio" checked="" class="form-check-input" name="post" id="post-1">
+                                                        <label for="post-1" class="form-check-label">
+                                                            پیک موتوری اختصاصی (کمتر از 5 ساعت): 80,000 تومان
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check mt-3">
+                                                        <input type="radio" class="form-check-input" name="post" id="post-2">
+                                                        <label for="post-2" class="form-check-label">
+                                                            پیک عمومی شاهان (2 تا 3 روز کاری): 50,000 تومان
+
+                                                        </label>
+                                                    </div>
+                                                </form>
+                                            </div>
+
+                                            <div class="d-flex factor-item mb-3 align-items-center justify-content-between">
+                                                <h5 class="title-font mb-0 h6">مجموع</h5>
+                                                <p class="mb-0 font-18">1,308,000 تومان</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <button type="submit" class="btn product-meta-add-to-cart-btn main-color-one-bg rounded-pill">
+                                        ثبت سفارش
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </form>
+                </div>
+                <div class="Dottedsquare-checkout d-lg-flex d-none"></div>
+            </div>
+        </div>
+    </div>
+
+</div>
 
 
-                            <section class="content-wrapper bg-white p-3 rounded-2 mb-4">
+<!-- end content -->
 
-                                <!-- start vontent header -->
-                                <section class="content-header mb-3">
-                                    <section class="d-flex justify-content-between align-items-center">
-                                        <h2 class="content-header-title content-header-title-small">
-                                            انتخاب نوع پرداخت
-                                        </h2>
-                                        <section class="content-header-link">
-                                            <!--<a href="#">مشاهده همه</a>-->
-                                        </section>
-                                    </section>
-                                </section>
-                                <section class="payment-select">
+<div class="mobile-footer d-lg-none d-flex">
+    <div class="parent">
+        <div class="item" onclick="topFunction()">
+            <i class="bi bi-chevron-up font-20"></i>
+        </div>
+        <div class="item">
+            <a href="index.html">
+                <i class="bi bi-house font-20"></i>
+            </a>
+        </div>
+        <div class="item item-float">
+            <a href="#offcanvasCart" data-bs-toggle="offcanvas" href="#offcanvasCart" role="button"
+               aria-controls="offcanvasCart">
+                <i class="bi bi-bag font-20"></i>
+            </a>
+        </div>
+        <div class="item ">
+            <a href="index.html">
+                <i class="bi bi-archive"></i>
+            </a>
+        </div>
+        <div class="item">
+            <a href="index.html">
+                <i class="bi bi-person"></i>
+            </a>
+        </div>
+    </div>
+</div>
 
-                                    <section class="payment-alert alert alert-primary d-flex align-items-center p-2" role="alert">
-                                        <i class="fa fa-info-circle flex-shrink-0 me-2"></i>
-                                        <secrion>
-                                            برای پیشگیری از انتقال ویروس کرونا پیشنهاد می کنیم روش پرداخت اینترنتی رو پرداخت کنید.
-                                        </secrion>
-                                    </section>
+<!-- end mobile menu -->
 
-                                    <input type="radio" name="payment_type" value="1" id="d1"/>
-                                    <label for="d1" class="col-12 col-md-4 payment-wrapper mb-2 pt-2">
-                                        <section class="mb-2">
-                                            <i class="fa fa-credit-card mx-1"></i>
-                                            پرداخت آنلاین
-                                        </section>
-                                        <section class="mb-2">
-                                            <i class="fa fa-calendar-alt mx-1"></i>
-                                            درگاه پرداخت زرین پال
-                                        </section>
-                                    </label>
+<!--start cart canvas-->
 
-                                    <section class="mb-2"></section>
+@include('customer.layouts.cartbar')
 
-                                    <input type="radio" name="payment_type" value="2" id="d2"/>
-                                    <label for="d2" class="col-12 col-md-4 payment-wrapper mb-2 pt-2">
-                                        <section class="mb-2">
-                                            <i class="fa fa-id-card-alt mx-1"></i>
-                                            پرداخت آفلاین
-                                        </section>
-                                        <section class="mb-2">
-                                            <i class="fa fa-calendar-alt mx-1"></i>
-                                            حداکثر در 2 روز کاری بررسی می شود
-                                        </section>
-                                    </label>
+<!--end cart canvas-->
 
-                                    <section class="mb-2"></section>
-
-                                    <input type="radio" name="payment_type" value="3" id="d3"/>
-                                    <label for="d3" class="col-12 col-md-4 payment-wrapper mb-2 pt-2">
-                                        <section class="mb-2">
-                                            <i class="fa fa-money-check mx-1"></i>
-                                            پرداخت در محل
-                                        </section>
-                                        <section class="mb-2">
-                                            <i class="fa fa-calendar-alt mx-1"></i>
-                                            پرداخت به پیک هنگام دریافت کالا
-                                        </section>
-                                    </label>
-
-
-                                </section>
-                            </section>
-
-
-
-
-                        </section>
-                        <section class="col-md-3">
-                            <section class="content-wrapper bg-white p-3 rounded-2 cart-total-price">
-                                <section class="d-flex justify-content-between align-items-center">
-                                    <p class="text-muted">قیمت کالاها (2)</p>
-                                    <p class="text-muted">398,000 تومان</p>
-                                </section>
-
-                                <section class="d-flex justify-content-between align-items-center">
-                                    <p class="text-muted">تخفیف کالاها</p>
-                                    <p class="text-danger fw-bolder">78,000 تومان</p>
-                                </section>
-
-                                <section class="border-bottom mb-3"></section>
-
-                                <section class="d-flex justify-content-between align-items-center">
-                                    <p class="text-muted">جمع سبد خرید</p>
-                                    <p class="fw-bolder">320,000 تومان</p>
-                                </section>
-
-                                <section class="d-flex justify-content-between align-items-center">
-                                    <p class="text-muted">هزینه ارسال</p>
-                                    <p class="text-warning">54,000 تومان</p>
-                                </section>
-
-                                <section class="d-flex justify-content-between align-items-center">
-                                    <p class="text-muted">تخفیف اعمال شده</p>
-                                    <p class="text-danger">100,000 تومان</p>
-                                </section>
-
-                                <p class="my-3">
-                                    <i class="fa fa-info-circle me-1"></i> کاربر گرامی کالاها بر اساس نوع ارسالی که انتخاب می کنید در مدت زمان ذکر شده ارسال می شود.
-                                </p>
-
-                                <section class="border-bottom mb-3"></section>
-
-                                <section class="d-flex justify-content-between align-items-center">
-                                    <p class="text-muted">مبلغ قابل پرداخت</p>
-                                    <p class="fw-bold">274,000 تومان</p>
-                                </section>
-
-                                <section class="">
-                                    <section id="payment-button" class="text-warning border border-warning text-center py-2 pointer rounded-2 d-block">نوع پرداخت را انتخاب کن</section>
-                                    <a id="final-level" href="my-orders.html" class="btn btn-danger d-none">ثبت سفارش و گرفتن کد رهگیری</a>
-                                </section>
-
-                            </section>
-                        </section>
-                    </section>
-                </section>
-            </section>
-
-        </section>
-    </section>
-    <!-- end cart -->
-
-@endsection
-
-
-@section('script')
-    <script>
-
-    </script>
+<div class="float-btn">
+    <div class="container-fluid">
+        <!-- contact us floating -->
+        <div id="btncollapzion" class=" btn_collapzion"></div>
+        <div class="" id="contactOverlay"></div>
+        <!-- end contact us floating -->
+    </div>
+</div>
 @endsection

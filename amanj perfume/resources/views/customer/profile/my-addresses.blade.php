@@ -1,4 +1,4 @@
-@extends('customer.layouts.master-two-col')
+@extends('customer.layouts.master-one-col')
 
 @section('head-tag')
     <title>لیست آدرس های شما</title>
@@ -6,384 +6,320 @@
 
 
 @section('content')
-    <!-- start body -->
-    <section class="">
-        <section id="main-body-two-col" class="container-xxl body-container">
-            @if (session('success'))
-                <div class="alert alert-success">
-                    {{ session('success') }}
+
+
+<!-- start content -->
+
+<!-- start breadcroumb -->
+
+<div class="bread-crumb py-4">
+    <div class="container-fluid">
+        <nav aria-label="breadcrumb" class="my-lg-0 my-2">
+            <ol class="breadcrumb mb-0">
+                <li class="breadcrumb-item"><a href="{{route('customer.home')}}" class="font-14 text-muted-two">خانه</a></li>
+                <li class="breadcrumb-item"><a href="" class="font-14 text-muted-two">پروفایل</a></li>
+
+                <li class="breadcrumb-item active main-color-one-color font-14 fw-bold" aria-current="page">  آدرس های من
+                </li>
+            </ol>
+        </nav>
+    </div>
+</div>
+
+<!-- end breadcroumb -->
+
+<div class="content">
+    <div class="container-fluid">
+
+        <div class="custom-filter d-lg-none d-block">
+            <button class="btn btn-filter-float border-0 main-color-two-bg shadow-box px-4 rounded-3 position-fixed" style="z-index: 999;bottom:80px;" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+                <i class="bi bi-list font-20 fw-bold text-white"></i>
+                <span class="d-block font-14 text-white">منو</span>
+            </button>
+
+            <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title">منو</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
-            @endif
-            <section class="row">
+                <div class="offcanvas-body">
+                    <div class="panel-nav-logo">
+                        <a href="" class="text-center d-block mb-3">
+                            <img src="assets/img/logo.png" alt="" class="img-fluid" width="200">
+                        </a>
+                    </div>
+                    <div class="penel-nav">
+                        <div class="panel-nav-nav">
+                            <nav class="navbar profile-box-nav">
+                                <ul class="navbar-nav flex-column">
+                                    <li class="nav-item active"><a href="" class="nav-link">
+                                        <i class="bi bi-house-door"></i>پروفایل</a>
+                                    </li>
+                                    <li class="nav-item"><a href="" class="nav-link">
+                                        <i class="bi bi-cart-check"></i>سفارش های من <span class="badge rounded-pill badge-spn">5</span></a>
+                                    </li>
+                                    <li class="nav-item"><a href="" class="nav-link">
+                                        <i class="bi bi-pin-map"></i>آدرس های من</a>
+                                    </li>
+                                    <li class="nav-item"><a href="" class="nav-link">
+                                        <i class="bi bi-bell"></i>پیام ها و اطلاعیه ها</a>
+                                    </li>
+                                    <li class="nav-item"><a href="" class="nav-link">
+                                        <i class="bi bi-chat-dots"></i>نظرات من</a>
+                                    </li>
+                                    <li class="nav-item"><a href="" class="nav-link">
+                                        <i class="bi bi-question-circle"></i>درخواست پشتیبانی</a>
+                                    </li>
+                                    <li class="nav-item"><a href="" class="nav-link">
+                                        <i class="bi bi-heart"></i>محصولات مورد علاقه</a>
+                                    </li>
+                                    <li class="nav-item"><a href="" class="nav-link">
+                                        <i class="bi bi-gift"></i>کد های تخفیف من</a>
+                                    </li>
+                                    <li class="nav-item"><a href="" class="nav-link">
+                                        <i class="bi bi-arrow-right-square"></i>خروج از حساب کاربری</a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
+        <div class="panel position-relative">
+            <div class="row gy-4">
+                <div class="col-lg-3 d-lg-block d-none">
+                    <div class="panel-nav-logo">
+                        <a href="" class="text-center d-block mb-3">
+                            <img src="assets/img/logo.png" alt="" class="img-fluid" width="200">
+                        </a>
+                    </div>
+                    @include('customer.layouts.sidebar')
 
-                @include('customer.layouts.partials.profile-sidebar')
+                </div>
+                <div class="col-lg-9">
+                    <div class="position-sticky top-0">
+                        <div class="panel-header mb-3">
+                            <div class="content-box">
+                                <div class="container-fluid">
+                                    <div class="row gy-5 align-items-center">
+                                        <div class="col-md-6 col-8">
+                                            <div class="d-flex align-items-center">
+                                                <h6> امیر عزیز به پنل کاربری خوش آمدید</h6>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 col-4">
+                                            <div class="panel-alert d-flex justify-content-end">
+                                                <i class="bi bi-bell pointer"></i>
+                                                <span class="count-item rounded-circle">0</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="d-flex align-items-center panel-profile">
+                                                <img src="assets/img/user.png" class="img-fluid img-profile-panel rounded-circle me-3 shadow-md" alt="">
+                                                <div class="d-grid gap-2">
+                                                    <h6 class="font-14 main-color-one-color">حساب کاربری من</h6>
+                                                    <div class="d-flex align-items-center">
+                                                        <h6 class="font-14">
+                                                            امیر رضایی</h6>
+                                                        <a href="" class="ms-2"><i class="bi bi-pencil-square"></i></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
-                <main id="main-body" class="main-body col-md-9">
-                    <section class="content-wrapper bg-white p-3 rounded-2 mb-2">
+                        <div class="slider-title mt-4">
+                            <div class="slider-title-desc">
+                                <div class="slider-title-title pb-4">
+                                    <h2 class="h1 title-font">آدرس های ثبت شده</h2>
+                                </div>
+                            </div>
+                        </div>
 
-                        <!-- start vontent header -->
-                        <section class="content-header mb-4">
-                            <section class="d-flex justify-content-between align-items-center">
-                                <h2 class="content-header-title">
-                                    <span>آدرس های من</span>
-                                </h2>
+                        <div class="penel-form">
+                            <div class="content-box">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="bg-white card addresses-item mb-4 shadow-sm">
+                                                <div class="gold-members p-4">
+                                                    <div class="media">
+                                                        <div class="media-body">
+                                                            <h6 class="mb-1">خانه</h6>
+                                                            <p class="text-overflow-2 address-line">
+                                                                لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده
+                                                                از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و
+                                                                سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای
+                                                                متنوع با هدف بهبود ابزارهای کاربردی می باشد، کتابهای زیادی در شصت و سه
+                                                                درصد گذشته حال و آینده، شناخت فراوان جامعه و متخصصان را می طلبد، تا با
+                                                                نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان
+                                                                خلاقی، و فرهنگ پیشرو در زبان فارسی ایجاد کرد، در این صورت می توان امید
+                                                                داشت که تمام و دشواری موجود در ارائه راهکارها، و شرایط سخت تایپ به پایان
+                                                                رسد و زمان مورد نیاز شامل حروفچینی دستاوردهای اصلی، و جوابگوی سوالات
+                                                                پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.
+                                                            </p>
+                                                            <p class="mb-0 text-black font-weight-bold">
+                                                                <a class="me-3" data-bs-toggle="modal" data-bs-target="#addressModal" href="#"><i class="bi bi-pencil"></i> </a>
+                                                                <a class="text-danger" data-toggle="modal" data-target="#delete-address-modal" href="#"><i class="bi bi-trash"></i> </a></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="bg-white card addresses-item mb-4 shadow-sm">
+                                                <div class="gold-members p-4">
+                                                    <div class="media">
+                                                        <div class="media-body">
+                                                            <h6 class="mb-1">خانه</h6>
+                                                            <p class="text-overflow-2 address-line">
+                                                                لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده
+                                                                از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و
+                                                                سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای
+                                                                متنوع با هدف بهبود ابزارهای کاربردی می باشد، کتابهای زیادی در شصت و سه
+                                                                درصد گذشته حال و آینده، شناخت فراوان جامعه و متخصصان را می طلبد، تا با
+                                                                نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان
+                                                                خلاقی، و فرهنگ پیشرو در زبان فارسی ایجاد کرد، در این صورت می توان امید
+                                                                داشت که تمام و دشواری موجود در ارائه راهکارها، و شرایط سخت تایپ به پایان
+                                                                رسد و زمان مورد نیاز شامل حروفچینی دستاوردهای اصلی، و جوابگوی سوالات
+                                                                پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.
+                                                            </p>
+                                                            <p class="mb-0 text-black font-weight-bold">
+                                                                <a class="me-3" data-bs-toggle="modal" data-bs-target="#addressModal" href="#"><i class="bi bi-pencil"></i> </a>
+                                                                <a class="text-danger" data-toggle="modal" data-target="#delete-address-modal" href="#"><i class="bi bi-trash"></i> </a></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="bg-white card addresses-item mb-4 shadow-sm">
+                                                <div class="gold-members p-4">
+                                                    <div class="media">
+                                                        <div class="media-body">
+                                                            <h6 class="mb-1">خانه</h6>
+                                                            <p class="text-overflow-2 address-line">
+                                                                لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده
+                                                                از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و
+                                                                سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای
+                                                                متنوع با هدف بهبود ابزارهای کاربردی می باشد، کتابهای زیادی در شصت و سه
+                                                                درصد گذشته حال و آینده، شناخت فراوان جامعه و متخصصان را می طلبد، تا با
+                                                                نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان
+                                                                خلاقی، و فرهنگ پیشرو در زبان فارسی ایجاد کرد، در این صورت می توان امید
+                                                                داشت که تمام و دشواری موجود در ارائه راهکارها، و شرایط سخت تایپ به پایان
+                                                                رسد و زمان مورد نیاز شامل حروفچینی دستاوردهای اصلی، و جوابگوی سوالات
+                                                                پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.
+                                                            </p>
+                                                            <p class="mb-0 text-black font-weight-bold">
+                                                                <a class="me-3" data-bs-toggle="modal" data-bs-target="#addressModal" href="#"><i class="bi bi-pencil"></i> </a>
+                                                                <a class="text-danger" data-toggle="modal" data-target="#delete-address-modal" href="#"><i class="bi bi-trash"></i> </a></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="bg-white active card addresses-item mb-4 shadow-sm">
+                                                <div class="gold-members p-4">
+                                                    <div class="media">
+                                                        <div class="media-body">
+                                                            <h6 class="mb-1">خانه</h6>
+                                                            <p class="text-overflow-2 address-line">
+                                                                لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده
+                                                                از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و
+                                                                سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای
+                                                                متنوع با هدف بهبود ابزارهای کاربردی می باشد، کتابهای زیادی در شصت و سه
+                                                                درصد گذشته حال و آینده، شناخت فراوان جامعه و متخصصان را می طلبد، تا با
+                                                                نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان
+                                                                خلاقی، و فرهنگ پیشرو در زبان فارسی ایجاد کرد، در این صورت می توان امید
+                                                                داشت که تمام و دشواری موجود در ارائه راهکارها، و شرایط سخت تایپ به پایان
+                                                                رسد و زمان مورد نیاز شامل حروفچینی دستاوردهای اصلی، و جوابگوی سوالات
+                                                                پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.
+                                                            </p>
+                                                            <p class="mb-0 text-black font-weight-bold">
+                                                                <a class="me-3" data-bs-toggle="modal" data-bs-target="#addressModal" href="#"><i class="bi bi-pencil"></i> </a>
+                                                                <a class="text-danger" data-toggle="modal" data-target="#delete-address-modal" href="#"><i class="bi bi-trash"></i> </a></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="bg-white card addresses-item mb-4 shadow-sm">
+                                                <div class="gold-members p-4">
+                                                    <div class="media">
+                                                        <div class="media-body">
+                                                            <h6 class="mb-1">خانه</h6>
+                                                            <p class="text-overflow-2 address-line">
+                                                                لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده
+                                                                از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و
+                                                                سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای
+                                                                متنوع با هدف بهبود ابزارهای کاربردی می باشد، کتابهای زیادی در شصت و سه
+                                                                درصد گذشته حال و آینده، شناخت فراوان جامعه و متخصصان را می طلبد، تا با
+                                                                نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان
+                                                                خلاقی، و فرهنگ پیشرو در زبان فارسی ایجاد کرد، در این صورت می توان امید
+                                                                داشت که تمام و دشواری موجود در ارائه راهکارها، و شرایط سخت تایپ به پایان
+                                                                رسد و زمان مورد نیاز شامل حروفچینی دستاوردهای اصلی، و جوابگوی سوالات
+                                                                پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.
+                                                            </p>
+                                                            <p class="mb-0 text-black font-weight-bold">
+                                                                <a class="me-3" data-bs-toggle="modal" data-bs-target="#addressModal" href="#"><i class="bi bi-pencil"></i> </a>
+                                                                <a class="text-danger" data-toggle="modal" data-target="#delete-address-modal" href="#"><i class="bi bi-trash"></i> </a></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="bg-white active border-dark border-2 card addresses-item mb-4 shadow-sm">
+                                                <div class="gold-members p-4">
+                                                    <div class="media">
+                                                        <div class="media-body">
+                                                            <h6 class="mb-1">خانه</h6>
+                                                            <p class="text-overflow-2 address-line">
+                                                                لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده
+                                                                از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و
+                                                                سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای
+                                                                متنوع با هدف بهبود ابزارهای کاربردی می باشد، کتابهای زیادی در شصت و سه
+                                                                درصد گذشته حال و آینده، شناخت فراوان جامعه و متخصصان را می طلبد، تا با
+                                                                نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان
+                                                                خلاقی، و فرهنگ پیشرو در زبان فارسی ایجاد کرد، در این صورت می توان امید
+                                                                داشت که تمام و دشواری موجود در ارائه راهکارها، و شرایط سخت تایپ به پایان
+                                                                رسد و زمان مورد نیاز شامل حروفچینی دستاوردهای اصلی، و جوابگوی سوالات
+                                                                پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.
+                                                            </p>
+                                                            <p class="mb-0 text-black font-weight-bold">
+                                                                <a class="me-3" data-bs-toggle="modal" data-bs-target="#addressModal" href="#"><i class="bi bi-pencil"></i> </a>
+                                                                <a class="text-danger" data-toggle="modal" data-target="#delete-address-modal" href="#"><i class="bi bi-trash"></i> </a></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
-                            </section>
-                        </section>
-                        <!-- end vontent header -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
+<!-- end content -->
 
+<!--start cart canvas-->
 
-                        <section class="address-select">
+@include('customer.layouts.cartbar')
 
-                            @forelse(auth()->user()->addresses as $address)
-                                <input type="radio" name="address_id" value="{{ $address->id }}"
-                                    id="a-{{ $address->id }}" />
-                                <!--checked="checked"-->
-                                    <label for="a-{{ $address->id }}" class="address-wrapper mb-2 p-2">
-                                        <section class="mb-2">
-                                            <i class="fa fa-map-marker-alt mx-1"></i>
-                                            آدرس : {{ $address->address ?? '-' }}
-                                        </section>
-                                        <section class="mb-2">
-                                            <i class="fa fa-user-tag mx-1"></i>
-                                            گیرنده : {{ $address->recipient_first_name ?? '-' }}
-                                            {{ $address->recipient_last_name ?? '-' }}
-                                        </section>
-                                        <section class="mb-2">
-                                            <i class="fa fa-mobile-alt mx-1"></i>
-                                            موبایل گیرنده : {{ $address->mobile ?? '-' }}
-                                        </section>
-                                        <a class="" data-bs-toggle="modal"
-                                            data-bs-target="#edit-address-{{ $address->id }}"><i class="fa fa-edit"></i>
-                                            ویرایش آدرس</a>
-                                    </label>
+<!--end cart canvas-->
 
-
-                                    <!-- start edit address Modal -->
-                                    <section class="modal fade" id="edit-address-{{ $address->id }}" tabindex="-1"
-                                        aria-labelledby="add-address-label" aria-hidden="true">
-                                        <section class="modal-dialog">
-                                            <section class="modal-content">
-                                                <section class="modal-header">
-                                                    <h5 class="modal-title" id="add-address-label"><i
-                                                            class="fa fa-plus"></i> ویرایش آدرس </h5>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                        aria-label="Close"></button>
-                                                </section>
-                                                <section class="modal-body">
-                                                    <form class="row" method="post"
-                                                        action="{{ route('customer.sales-process.update-address', $address->id) }}">
-                                                        @csrf
-                                                        @method('PUT')
-                                                        <section class="col-6 mb-2">
-                                                            <label for="province" class="form-label mb-1">استان</label>
-                                                            <select name="province_id" class="form-select form-select-sm"
-                                                                id="province-{{ $address->id }}">
-                                                                @foreach ($provinces as $province)
-                                                                    <option
-                                                                        {{ $address->province_id == $province->id ? 'selected' : '' }}
-                                                                        value="{{ $province->id }}"
-                                                                        data-url="{{ route('customer.sales-process.get-cities', $province->id) }}">
-                                                                        {{ $province->name }}</option>
-                                                                @endforeach
-
-                                                            </select>
-                                                        </section>
-
-                                                        <section class="col-6 mb-2">
-                                                            <label for="city" class="form-label mb-1">شهر</label>
-                                                            <select name="city_id" class="form-select form-select-sm"
-                                                                id="city-{{ $address->id }}">
-                                                                <option selected>شهر را انتخاب کنید</option>
-                                                            </select>
-                                                        </section>
-                                                        <section class="col-12 mb-2">
-                                                            <label for="address" class="form-label mb-1">نشانی</label>
-                                                            <textarea name="address" class="form-control form-control-sm" id="address" placeholder="نشانی">{{ $address->address }}</textarea>
-                                                        </section>
-
-                                                        <section class="col-6 mb-2">
-                                                            <label for="postal_code" class="form-label mb-1">کد
-                                                                پستی</label>
-                                                            <input value="{{ $address->postal_code }}" type="text"
-                                                                name="postal_code" class="form-control form-control-sm"
-                                                                id="postal_code" placeholder="کد پستی">
-                                                        </section>
-
-                                                        <section class="col-3 mb-2">
-                                                            <label for="no" class="form-label mb-1">پلاک</label>
-                                                            <input type="text" value="{{ $address->no }}"
-                                                                name="no" class="form-control form-control-sm"
-                                                                id="no" placeholder="پلاک">
-                                                        </section>
-
-                                                        <section class="col-3 mb-2">
-                                                            <label for="unit" class="form-label mb-1">واحد</label>
-                                                            <input type="text" value="{{ $address->unit }}"
-                                                                name="unit" class="form-control form-control-sm"
-                                                                id="unit" placeholder="واحد">
-                                                        </section>
-
-                                                        <section class="border-bottom mt-2 mb-3"></section>
-
-                                                        <section class="col-12 mb-2">
-                                                            <section class="form-check">
-                                                                <input
-                                                                    {{ $address->recipient_first_name ? 'checked' : '' }}
-                                                                    class="form-check-input" name="receiver"
-                                                                    type="checkbox" id="receiver">
-                                                                <label class="form-check-label" for="receiver">
-                                                                    گیرنده سفارش خودم نیستم (اطلاعات زیر تکمیل شود)
-                                                                </label>
-                                                            </section>
-                                                        </section>
-
-                                                        <section class="col-6 mb-2">
-                                                            <label for="first_name" class="form-label mb-1">نام
-                                                                گیرنده</label>
-                                                            <input
-                                                                value="{{ $address->recipient_first_name ?? $address->recipient_first_name }}"
-                                                                type="text" name="recipient_first_name"
-                                                                class="form-control form-control-sm" id="first_name"
-                                                                placeholder="نام گیرنده">
-                                                        </section>
-
-                                                        <section class="col-6 mb-2">
-                                                            <label for="last_name" class="form-label mb-1">نام
-                                                                خانوادگی گیرنده</label>
-                                                            <input
-                                                                value="{{ $address->recipient_last_name ?? $address->recipient_last_name }}"
-                                                                type="text" name="recipient_last_name"
-                                                                class="form-control form-control-sm" id="last_name"
-                                                                placeholder="نام خانوادگی گیرنده">
-                                                        </section>
-
-                                                        <section class="col-6 mb-2">
-                                                            <label for="mobile" class="form-label mb-1">شماره
-                                                                موبایل</label>
-                                                            <input value="{{ $address->mobile ?? $address->mobile }}"
-                                                                type="text" name="mobile"
-                                                                class="form-control form-control-sm" id="mobile"
-                                                                placeholder="شماره موبایل">
-                                                        </section>
-
-
-                                                </section>
-                                                <section class="modal-footer py-1">
-                                                    <button type="submit" class="btn btn-sm btn-primary">ثبت
-                                                        آدرس</button>
-                                                    <button type="button" class="btn btn-sm btn-danger"
-                                                        data-bs-dismiss="modal">بستن</button>
-                                                </section>
-                                                </form>
-
-                                            </section>
-                                        </section>
-                                    </section>
-                                    <!-- end add address Modal -->
-                                @empty
-                                    <p>آدرسی یافت نشد</p>
-                            @endforelse
-
-
-
-
-
-                            <section class="address-add-wrapper">
-                                <button class="address-add-button" type="button" data-bs-toggle="modal"
-                                    data-bs-target="#add-address"><i class="fa fa-plus"></i> ایجاد آدرس
-                                    جدید</button>
-                                <!-- start add address Modal -->
-                                <section class="modal fade" id="add-address" tabindex="-1"
-                                    aria-labelledby="add-address-label" aria-hidden="true">
-                                    <section class="modal-dialog">
-                                        <section class="modal-content">
-                                            <section class="modal-header">
-                                                <h5 class="modal-title" id="add-address-label"><i class="fa fa-plus"></i>
-                                                    ایجاد آدرس جدید</h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                    aria-label="Close"></button>
-                                            </section>
-                                            <section class="modal-body">
-                                                <form class="row" method="post"
-                                                    action="{{ route('customer.sales-process.add-address') }}">
-                                                    @csrf
-                                                    <section class="col-6 mb-2">
-                                                        <label for="province" class="form-label mb-1">استان</label>
-                                                        <select name="province_id" class="form-select form-select-sm"
-                                                            id="province">
-                                                            <option selected>استان را انتخاب کنید</option>
-                                                            @foreach ($provinces as $province)
-                                                                <option value="{{ $province->id }}"
-                                                                    data-url="{{ route('customer.sales-process.get-cities', $province->id) }}">
-                                                                    {{ $province->name }}</option>
-                                                            @endforeach
-
-                                                        </select>
-                                                    </section>
-
-                                                    <section class="col-6 mb-2">
-                                                        <label for="city" class="form-label mb-1">شهر</label>
-                                                        <select name="city_id" class="form-select form-select-sm"
-                                                            id="city">
-                                                            <option selected>شهر را انتخاب کنید</option>
-                                                        </select>
-                                                    </section>
-                                                    <section class="col-12 mb-2">
-                                                        <label for="address" class="form-label mb-1">نشانی</label>
-                                                        <textarea name="address" class="form-control form-control-sm" id="address" placeholder="نشانی"></textarea>
-                                                    </section>
-
-                                                    <section class="col-6 mb-2">
-                                                        <label for="postal_code" class="form-label mb-1">کد
-                                                            پستی</label>
-                                                        <input type="text" name="postal_code"
-                                                            class="form-control form-control-sm" id="postal_code"
-                                                            placeholder="کد پستی">
-                                                    </section>
-
-                                                    <section class="col-3 mb-2">
-                                                        <label for="no" class="form-label mb-1">پلاک</label>
-                                                        <input type="text" name="no"
-                                                            class="form-control form-control-sm" id="no"
-                                                            placeholder="پلاک">
-                                                    </section>
-
-                                                    <section class="col-3 mb-2">
-                                                        <label for="unit" class="form-label mb-1">واحد</label>
-                                                        <input type="text" name="unit"
-                                                            class="form-control form-control-sm" id="unit"
-                                                            placeholder="واحد">
-                                                    </section>
-
-                                                    <section class="border-bottom mt-2 mb-3"></section>
-
-                                                    <section class="col-12 mb-2">
-                                                        <section class="form-check">
-                                                            <input class="form-check-input" name="receiver"
-                                                                type="checkbox" id="receiver">
-                                                            <label class="form-check-label" for="receiver">
-                                                                گیرنده سفارش خودم نیستم (اطلاعات زیر تکمیل شود)
-                                                            </label>
-                                                        </section>
-                                                    </section>
-
-                                                    <section class="col-6 mb-2">
-                                                        <label for="first_name" class="form-label mb-1">نام
-                                                            گیرنده</label>
-                                                        <input type="text" name="recipient_first_name"
-                                                            class="form-control form-control-sm" id="first_name"
-                                                            placeholder="نام گیرنده">
-                                                    </section>
-
-                                                    <section class="col-6 mb-2">
-                                                        <label for="last_name" class="form-label mb-1">نام
-                                                            خانوادگی گیرنده</label>
-                                                        <input type="text" name="recipient_last_name"
-                                                            class="form-control form-control-sm" id="last_name"
-                                                            placeholder="نام خانوادگی گیرنده">
-                                                    </section>
-
-                                                    <section class="col-6 mb-2">
-                                                        <label for="mobile" class="form-label mb-1">شماره
-                                                            موبایل</label>
-                                                        <input type="text" name="mobile"
-                                                            class="form-control form-control-sm" id="mobile"
-                                                            placeholder="شماره موبایل">
-                                                    </section>
-
-
-                                            </section>
-                                            <section class="modal-footer py-1">
-                                                <button type="submit" class="btn btn-sm btn-primary">ثبت
-                                                    آدرس</button>
-                                                <button type="button" class="btn btn-sm btn-danger"
-                                                    data-bs-dismiss="modal">بستن</button>
-                                            </section>
-                                            </form>
-
-                                        </section>
-                                    </section>
-                                </section>
-                                <!-- end add address Modal -->
-                            </section>
-
-                        </section>
-
-                    </section>
-                </main>
-            </section>
-        </section>
-    </section>
-    <!-- end body -->
 @endsection
 
-
-@section('script')
-    <script>
-        $(document).ready(function() {
-            $('#province').change(function() {
-                var element = $('#province option:selected');
-                var url = element.attr('data-url');
-
-                $.ajax({
-                    url: url,
-                    type: "GET",
-                    success: function(response) {
-                        if (response.status) {
-                            let cities = response.cities;
-                            $('#city').empty();
-                            cities.map((city) => {
-                                $('#city').append($('<option/>').val(city.id).text(city
-                                    .name))
-                            })
-                        } else {
-                            errorToast('خطا پیش آمده است')
-                        }
-                    },
-                    error: function() {
-                        errorToast('خطا پیش آمده است')
-                    }
-                })
-            })
-
-
-            // edit
-            var addresses = {!! auth()->user()->addresses !!}
-            // console.log(addresses);
-            addresses.map(function(address) {
-                var id = address.id;
-                var target = `#province-${id}`;
-                var selected = `${target} option:selected`
-                $(target).change(function() {
-                    var element = $(selected);
-                    var url = element.attr('data-url');
-
-                    $.ajax({
-                        url: url,
-                        type: "GET",
-                        success: function(response) {
-                            if (response.status) {
-                                let cities = response.cities;
-                                $(`#city-${id}`).empty();
-                                cities.map((city) => {
-                                    $(`#city-${id}`).append($('<option/>').val(
-                                        city.id).text(city
-                                        .name))
-                                })
-                            } else {
-                                errorToast('خطا پیش آمده است')
-                            }
-                        },
-                        error: function() {
-                            errorToast('خطا پیش آمده است')
-                        }
-                    })
-                })
-            })
-
-        })
-    </script>
-@endsection

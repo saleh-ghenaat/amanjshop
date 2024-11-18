@@ -70,4 +70,7 @@ class PaymentController extends Controller
        }
 
     }
+    public function factor(){
+        return view('customer.sales-process.factor');
+    }
 }

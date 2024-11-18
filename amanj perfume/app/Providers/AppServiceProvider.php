@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\User;
 use App\Models\Notification;
 use App\Models\Content\Comment;
 use App\Models\Market\CartItem;
@@ -27,6 +28,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Auth::login(User::find(1));
         view()->composer('admin.layouts.header', function ($view) {
             $view->with('unseenComments', Comment::where('seen', 0)->get());
             $view->with('notifications', Notification::where('read_at', null)->get());

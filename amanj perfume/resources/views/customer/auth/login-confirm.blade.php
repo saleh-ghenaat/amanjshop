@@ -54,7 +54,7 @@
 
 
                                         <div class="form-group mt-3">
-                                            <button type="submit" id="submit" class="btn btn-success w-100 mt-4 btn-login">وورد به
+                                            <button type="submit" id="submit" class="btn btn-success w-100 mt-4 btn-login">ورود به
                                                 سایت
                                             </button>
                                         </div>

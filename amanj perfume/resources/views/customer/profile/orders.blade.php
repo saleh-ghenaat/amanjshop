@@ -1,27 +1,26 @@
 @extends('customer.layouts.master-one-col')
 
 @section('head-tag')
-<title>سفارشات من </title>
-<meta name="description" content="">
-<meta property="og:title" content="">
-<meta property="og:type" content="">
-<meta property="og:url" content="">
-<meta property="og:image" content="">
-
+<title>لیست علاقه مندی های شما</title>
 @endsection
 
 
 @section('content')
+
+
+
+<!-- start content -->
+
 <!-- start breadcroumb -->
 
 <div class="bread-crumb py-4">
     <div class="container-fluid">
         <nav aria-label="breadcrumb" class="my-lg-0 my-2">
             <ol class="breadcrumb mb-0">
-                <li class="breadcrumb-item"><a href="#" class="font-14 text-muted-two">خانه</a></li>
-                <li class="breadcrumb-item"><a href="#" class="font-14 text-muted-two">فروشگاه</a></li>
-                <li class="breadcrumb-item"><a href="#" class="font-14 text-muted-two">گوشی هوشمند</a></li>
-                <li class="breadcrumb-item active main-color-one-color font-14 fw-bold" aria-current="page">گوشی شیائومی
+                <li class="breadcrumb-item"><a href="{{route('customer.home')}}" class="font-14 text-muted-two">خانه</a></li>
+                <li class="breadcrumb-item"><a href="" class="font-14 text-muted-two">پروفایل</a></li>
+
+                <li class="breadcrumb-item active main-color-one-color font-14 fw-bold" aria-current="page">  سفارش های من
                 </li>
             </ol>
         </nav>
@@ -30,8 +29,6 @@
 
 <!-- end breadcroumb -->
 
-
-<!-- start content -->
 
 <div class="content">
     <div class="container-fluid">
@@ -57,32 +54,32 @@
                         <div class="panel-nav-nav">
                             <nav class="navbar profile-box-nav">
                                 <ul class="navbar-nav flex-column">
-                                    <li class="nav-item active"><a href="{{ route('customer.profile.profile') }}" class="nav-link">
-                                            <i class="bi bi-house-door"></i>پروفایل</a>
-                                    </li>
-                                    <li class="nav-item"><a href="{{ route('customer.profile.orders') }}" class="nav-link">
-                                            <i class="bi bi-cart-check"></i>سفارش های من <span class="badge rounded-pill badge-spn">5</span></a>
+                                    <li class="nav-item active"><a href="" class="nav-link">
+                                        <i class="bi bi-house-door"></i>پروفایل</a>
                                     </li>
                                     <li class="nav-item"><a href="" class="nav-link">
-                                            <i class="bi bi-pin-map"></i>آدرس های من</a>
+                                        <i class="bi bi-cart-check"></i>سفارش های من <span class="badge rounded-pill badge-spn">5</span></a>
                                     </li>
                                     <li class="nav-item"><a href="" class="nav-link">
-                                            <i class="bi bi-bell"></i>پیام ها و اطلاعیه ها</a>
+                                        <i class="bi bi-pin-map"></i>آدرس های من</a>
                                     </li>
                                     <li class="nav-item"><a href="" class="nav-link">
-                                            <i class="bi bi-chat-dots"></i>نظرات من</a>
+                                        <i class="bi bi-bell"></i>پیام ها و اطلاعیه ها</a>
                                     </li>
                                     <li class="nav-item"><a href="" class="nav-link">
-                                            <i class="bi bi-question-circle"></i>درخواست پشتیبانی</a>
-                                    </li>
-                                    <li class="nav-item"><a href="{{ route('customer.profile.my-favorites') }}" class="nav-link">
-                                            <i class="bi bi-heart"></i>محصولات مورد علاقه</a>
+                                        <i class="bi bi-chat-dots"></i>نظرات من</a>
                                     </li>
                                     <li class="nav-item"><a href="" class="nav-link">
-                                            <i class="bi bi-gift"></i>کد های تخفیف من</a>
+                                        <i class="bi bi-question-circle"></i>درخواست پشتیبانی</a>
                                     </li>
                                     <li class="nav-item"><a href="" class="nav-link">
-                                            <i class="bi bi-arrow-right-square"></i>خروج از حساب کاربری</a>
+                                        <i class="bi bi-heart"></i>محصولات مورد علاقه</a>
+                                    </li>
+                                    <li class="nav-item"><a href="" class="nav-link">
+                                        <i class="bi bi-gift"></i>کد های تخفیف من</a>
+                                    </li>
+                                    <li class="nav-item"><a href="" class="nav-link">
+                                        <i class="bi bi-arrow-right-square"></i>خروج از حساب کاربری</a>
                                     </li>
                                 </ul>
                             </nav>
@@ -100,41 +97,7 @@
                             <img src="assets/img/logo.png" alt="" class="img-fluid" width="200">
                         </a>
                     </div>
-                    <div class="penel-nav">
-                        <div class="panel-nav-nav">
-                            <nav class="navbar profile-box-nav">
-                                <ul class="navbar-nav flex-column">
-                                    <li class="nav-item active"><a href="{{ route('customer.profile.profile') }}" class="nav-link">
-                                            <i class="bi bi-house-door"></i>پروفایل</a>
-                                    </li>
-                                    <li class="nav-item"><a href="{{ route('customer.profile.orders') }}" class="nav-link">
-                                            <i class="bi bi-cart-check"></i>سفارش های من <span class="badge rounded-pill badge-spn">5</span></a>
-                                    </li>
-                                    <li class="nav-item"><a href="" class="nav-link">
-                                            <i class="bi bi-pin-map"></i>آدرس های من</a>
-                                    </li>
-                                    <li class="nav-item"><a href="" class="nav-link">
-                                            <i class="bi bi-bell"></i>پیام ها و اطلاعیه ها</a>
-                                    </li>
-                                    <li class="nav-item"><a href="" class="nav-link">
-                                            <i class="bi bi-chat-dots"></i>نظرات من</a>
-                                    </li>
-                                    <li class="nav-item"><a href="" class="nav-link">
-                                            <i class="bi bi-question-circle"></i>درخواست پشتیبانی</a>
-                                    </li>
-                                    <li class="nav-item"><a href="{{ route('customer.profile.my-favorites') }}" class="nav-link">
-                                            <i class="bi bi-heart"></i>محصولات مورد علاقه</a>
-                                    </li>
-                                    <li class="nav-item"><a href="" class="nav-link">
-                                            <i class="bi bi-gift"></i>کد های تخفیف من</a>
-                                    </li>
-                                    <li class="nav-item"><a href="" class="nav-link">
-                                            <i class="bi bi-arrow-right-square"></i>خروج از حساب کاربری</a>
-                                    </li>
-                                </ul>
-                            </nav>
-                        </div>
-                    </div>
+                   @include('customer.layouts.sidebar')
                 </div>
                 <div class="col-lg-9">
                     <div class="position-sticky top-0">
@@ -161,7 +124,7 @@
                                                     <div class="d-flex align-items-center">
                                                         <h6 class="font-14">
                                                             امیر رضایی</h6>
-                                                        <a href="{{ route('customer.profile.edit-profile') }}" class="ms-2"><i class="bi bi-pencil-square"></i></a>
+                                                        <a href="" class="ms-2"><i class="bi bi-pencil-square"></i></a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -183,28 +146,56 @@
                             <div class="table-responsive shadow-box roundedTable p-0">
                                 <table class="table  main-table rounded-0">
                                     <thead class="text-center">
-                                        <tr>
-                                            <th class="title-font">#</th>
-                                            <th class="title-font">شماره سفارش</th>
-                                            <th class="title-font">تاریخ ثبت سفارش</th>
-                                            <th class="title-font">مبلغ پرداختی</th>
-                                            <th class="title-font">وضعیت سفارش</th>
-                                            <th class="title-font">جزییات</th>
-                                        </tr>
+                                    <tr>
+                                        <th class="title-font">#</th>
+                                        <th class="title-font">شماره سفارش</th>
+                                        <th class="title-font">تاریخ ثبت سفارش</th>
+                                        <th class="title-font">مبلغ پرداختی</th>
+                                        <th class="title-font">وضعیت سفارش</th>
+                                        <th class="title-font">جزییات</th>
+                                    </tr>
                                     </thead>
                                     <tbody class="text-center">
-                                        @foreach($orders as $oerder)
-                                        <tr>
-                                            <td class="font-14">1</td>
-                                            <td class="font-14">2354632</td>
-                                            <td class="font-14">سه شنبه 13 دی 1401</td>
-                                            <td class="font-14">580,000 تومان</td>
-                                            <td class="font-14"><a href="" class="title-font">سفارش مرجوع شده</a></td>
-                                            <td class="font-14">
-                                                <a href="{{ route('customer.profile.order-item , $order->id') }}" class="btn border-0 main-color-one-bg waves-effect waves-light"><i class="bi bi-chevron-left"></i></a>
-                                            </td>
-                                        </tr>
-                                        @endforeach
+                                    <tr>
+                                        <td class="font-14">1</td>
+                                        <td class="font-14">2354632</td>
+                                        <td class="font-14">سه شنبه 13 دی 1401</td>
+                                        <td class="font-14">580,000 تومان</td>
+                                        <td class="font-14"><a href="" class="title-font">سفارش مرجوع شده</a></td>
+                                        <td class="font-14">
+                                            <a href="" class="btn border-0 main-color-one-bg waves-effect waves-light"><i class="bi bi-chevron-left"></i></a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="font-14">2</td>
+                                        <td class="font-14">2354632</td>
+                                        <td class="font-14">سه شنبه 13 دی 1401</td>
+                                        <td class="font-14">580,000 تومان</td>
+                                        <td class="font-14"><a href="" class="title-font">سفارش لغو شده</a></td>
+                                        <td class="font-14">
+                                            <a href="" class="btn border-0 main-color-one-bg waves-effect waves-light"><i class="bi bi-chevron-left"></i></a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="font-14">1</td>
+                                        <td class="font-14">2354632</td>
+                                        <td class="font-14">سه شنبه 13 دی 1401</td>
+                                        <td class="font-14">580,000 تومان</td>
+                                        <td class="font-14"><a href="" class="title-font">سفارش تحویل داده شده</a></td>
+                                        <td class="font-14">
+                                            <a href="" class="btn border-0 main-color-one-bg waves-effect waves-light"><i class="bi bi-chevron-left"></i></a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="font-14">2</td>
+                                        <td class="font-14">2354632</td>
+                                        <td class="font-14">سه شنبه 13 دی 1401</td>
+                                        <td class="font-14">580,000 تومان</td>
+                                        <td class="font-14"><a href="" class="title-font">سفارش در انتظار پرداخت</a></td>
+                                        <td class="font-14">
+                                            <a href="" class="btn border-0 main-color-one-bg waves-effect waves-light"><i class="bi bi-chevron-left"></i></a>
+                                        </td>
+                                    </tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -212,31 +203,22 @@
                             <div class="my-paginate mt-5">
                                 <nav aria-label="Page navigation example">
                                     <ul class="pagination justify-content-center">
-                                        {{-- لینک صفحه قبلی --}}
-                                        <li class="page-item {{ $orders->onFirstPage() ? 'disabled' : '' }}">
-                                            <a class="page-link rounded-3" href="{{ $orders->previousPageUrl() }}" aria-label="Previous">
-                                                <i class="bi bi-chevron-right"></i>
-                                            </a>
+                                        <li class="page-item disabled">
+                                            <a class="page-link rounded-3" href="#"><i class="bi bi-chevron-right"></i></a>
                                         </li>
-
-                                        {{-- لینک‌های صفحه --}}
-                                        @foreach ($orders->getUrlRange(max(1, $orders->currentPage() - 2), min($orders->lastPage(), $orders->currentPage() + 2)) as $page => $url)
-                                        <li class="page-item {{ $page == $orders->currentPage() ? 'active' : '' }}">
-                                            <a class="page-link rounded-3" href="{{ $url }}">{{ $page }}</a>
-                                        </li>
-                                        @endforeach
-
-                                        {{-- لینک صفحه بعدی --}}
-                                        <li class="page-item {{ $orders->hasMorePages() ? '' : 'disabled' }}">
-                                            <a class="page-link rounded-3" href="{{ $orders->nextPageUrl() }}" aria-label="Next">
-                                                <i class="bi bi-chevron-left"></i>
-                                            </a>
+                                        <li class="page-item active"><a class="page-link rounded-3" href="#">1</a></li>
+                                        <li class="page-item"><a class="page-link rounded-3" href="#">2</a></li>
+                                        <li class="page-item"><a class="page-link rounded-3" href="#">3</a></li>
+                                        <li class="page-item"><a class="page-link rounded-3" href="#">...</a></li>
+                                        <li class="page-item"><a class="page-link rounded-3" href="#">14</a></li>
+                                        <li class="page-item"><a class="page-link rounded-3" href="#">15</a></li>
+                                        <li class="page-item"><a class="page-link rounded-3" href="#">16</a></li>
+                                        <li class="page-item">
+                                            <a class="page-link rounded-3" href="#"><i class="bi bi-chevron-left"></i></a>
                                         </li>
                                     </ul>
                                 </nav>
                             </div>
-
-
 
                         </div>
                     </div>
@@ -247,9 +229,9 @@
     </div>
 </div>
 
-<!-- end content -->
 
-<!-- mobile menu -->
+
+<!-- end content -->
 
 <div class="mobile-footer d-lg-none d-flex">
     <div class="parent">
@@ -263,7 +245,7 @@
         </div>
         <div class="item item-float">
             <a href="#offcanvasCart" data-bs-toggle="offcanvas" href="#offcanvasCart" role="button"
-                aria-controls="offcanvasCart">
+               aria-controls="offcanvasCart">
                 <i class="bi bi-bag font-20"></i>
             </a>
         </div>
@@ -282,98 +264,13 @@
 
 <!-- end mobile menu -->
 
+
 <!--start cart canvas-->
 
-<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasCart" aria-labelledby="offcanvasCartLabel">
-    <div class="offcanvas-header shadow-md">
-        <h5 class="offcanvas-title title-font" id="offcanvasCartLabel">سبد خرید <small class="text-muted font-14 ms-1">(1
-                مورد)</small></h5>
-        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-    </div>
-
-    <div class="offcanvas-body">
-        <ul class="navbar-nav cart-canvas-parent">
-            <li class="nav-item">
-                <div class="cart-canvas">
-                    <div class="row align-items-center">
-                        <div class="col-4 ps-0">
-                            <img src="assets/img/product/wach1.jpg" alt="">
-                        </div>
-                        <div class="col-8">
-                            <a href="">
-                                <h3 class="text-overflow-1 title-font font-14">ساعت مچی عقربه‌ای مردانه اینویکتا مدل
-                                    Automatico Ghost Reserve
-                                </h3>
-                                <div class="cart-canvas-price my-3 d-flex align-items-center">
-                                    <p class="mb-0 text-muted me-2 font-16 text-decoration-line-through">5,400,000</p>
-                                    <h6 class="title-font main-color-one-color">3,200,000 تومان</h6>
-                                </div>
-                            </a>
-                            <div class="cart-canvas-foot d-flex align-items-center justify-content-between">
-                                <div class="cart-canvas-count">
-                                    <span>تعداد:</span>
-                                    <span class="fw-bold main-color-one-color">3</span>
-                                </div>
-                                <div class="cart-canvas-delete">
-                                    <a href="" class="btn"><i class="bi bi-x"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </li>
-            <li class="nav-item">
-                <div class="cart-canvas">
-                    <div class="row align-items-center">
-                        <div class="col-4 ps-0">
-                            <img src="assets/img/product/wach3.jpg" alt="">
-                        </div>
-                        <div class="col-8">
-                            <a href="">
-                                <h3 class="text-overflow-1 title-font font-14">ساعت مچی عقربه‌ای مردانه اینویکتا مدل
-                                    Automatico Ghost Reserve
-                                </h3>
-                                <div class="cart-canvas-price my-3 d-flex align-items-center">
-                                    <p class="mb-0 text-muted me-2 font-16 text-decoration-line-through">5,400,000</p>
-                                    <h6 class="title-font main-color-one-color">3,200,000 تومان</h6>
-                                </div>
-                            </a>
-                            <div class="cart-canvas-foot d-flex align-items-center justify-content-between">
-                                <div class="cart-canvas-count">
-                                    <span>تعداد:</span>
-                                    <span class="fw-bold main-color-one-color">3</span>
-                                </div>
-                                <div class="cart-canvas-delete">
-                                    <a href="" class="btn"><i class="bi bi-x"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </li>
-        </ul>
-
-        <div class="cart-canvas-foots bg-white shadow-md">
-            <div class="row align-items-center">
-                <div class="col-6">
-                    <div class="cart-canvas-foot-sum">
-                        <p class="text-muted mb-2">جمع کل</p>
-                        <h5 class="title-font">11,000,000 تومان</h5>
-                    </div>
-                </div>
-                <div class="col-6">
-                    <div class="cart-canvas-foot-link text-end">
-                        <a href="" class="btn border-0 main-color-green text-white"><i
-                                class="bi bi-arrow-left me-1"></i> تکمیل خرید</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-</div>
+@include('customer.layouts.cartbar')
 
 <!--end cart canvas-->
+
 
 <div class="float-btn">
     <div class="container-fluid">
@@ -383,5 +280,4 @@
         <!-- end contact us floating -->
     </div>
 </div>
-
 @endsection

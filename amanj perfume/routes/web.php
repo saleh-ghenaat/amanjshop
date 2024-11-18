@@ -30,22 +30,26 @@ use App\Http\Controllers\admin\setting\SettingController;
 use App\Http\Controllers\admin\user\PermissionController;
 use App\Http\Controllers\Admin\Market\GuaranteeController;
 use App\Http\Controllers\Admin\Notify\EmailFileController;
+use App\Http\Controllers\Customer\Content\AboutController;
+use App\Http\Controllers\Customer\Content\SearchController;
 use App\Http\Controllers\Admin\Ticket\TicketAdminController;
+use App\Http\Controllers\Customer\Content\ContactController;
+use App\Http\Controllers\Customer\Profile\AddressController;
+use App\Http\Controllers\Customer\Profile\ProfileController;
 use App\Http\Controllers\Admin\Market\ProductColorController;
+use App\Http\Controllers\Customer\Profile\FavoriteController;
 use App\Http\Controllers\Admin\Market\PropertyValueController;
 use App\Http\Controllers\Customer\SalesProcess\CartController;
 use App\Http\Controllers\Admin\Ticket\TicketCategoryController;
 use App\Http\Controllers\Admin\Ticket\TicketPriorityController;
 use App\Http\Controllers\Auth\Customer\LoginRegisterController;
-use App\Http\Controllers\Customer\SalesProcess\AddressController;
 use App\Http\Controllers\Customer\SalesProcess\ProfileCompletionController;
+use App\Http\Controllers\Customer\Content\FaqController as CustomerFaqController;
 use App\Http\Controllers\Customer\Profile\OrderController as ProfileOrderController;
-use App\Http\Controllers\Customer\SalesProcess\PaymentController as CustomerPaymentController;
 use App\Http\Controllers\Admin\Content\CommentController as ContentCommentController;
 use App\Http\Controllers\Customer\Market\ProductController as MarketProductController;
 use App\Http\Controllers\Admin\Content\CategoryController as ContentCategoryController;
-use App\Http\Controllers\Customer\Profile\FavoriteController;
-use App\Http\Controllers\Customer\Profile\ProfileController;
+use App\Http\Controllers\Customer\SalesProcess\PaymentController as CustomerPaymentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -445,15 +449,20 @@ Route::namespace ('Auth')->group(function () {
 });
 
 Route::get('/', [HomeController::class, 'home'])->name('customer.home');
+Route::get('/about-us', [AboutController::class, 'index'])->name('customer.about');
+Route::get('/contact', [ContactController::class, 'index'])->name('customer.contact');
+Route::get('/faq', [CustomerFaqController::class, 'index'])->name('customer.faq');
+Route::get('/search', [SearchController::class, 'search'])->name('customer.search');
 
 Route::namespace('Profile')->group(function () {
-    
+
     Route::get('/profile', [ProfileController::class, 'index'])->name('customer.profile.profile');
     Route::get('/edit-profile', [ProfileController::class, 'edit'])->name('customer.profile.edit-profile');
     Route::get('/update-profile', [ProfileController::class, 'update'])->name('customer.profile.profile.update');
     Route::get('/orders', [ProfileOrderController::class, 'index'])->name('customer.profile.orders');
     Route::get('/order-item/{order}', [ProfileOrderController::class, 'show'])->name('customer.profile.order-item');
-    Route::get('/my-favorites', [FavoriteController::class, 'index'])->name('customer.profile.my-favorites'); 
+    Route::get('/my-favorites', [FavoriteController::class, 'index'])->name('customer.profile.my-favorites');
+    Route::get('/my-addresses', [AddressController::class, 'index'])->name('customer.profile.my-addresses');
 
 });
 Route::namespace ('SalesProcess')->group(function () {
@@ -468,20 +477,22 @@ Route::namespace ('SalesProcess')->group(function () {
     Route::get('/profile-completion', [ProfileCompletionController::class, 'profileCompletion'])->name('customer.sales-process.profile-completion');
     Route::post('/profile-completion', [ProfileCompletionController::class, 'update'])->name('customer.sales-process.profile-completion-update');
 
-    Route::middleware('profile.completion')->group(function () {
-        //address
-        Route::get('/address-and-delivery', [AddressController::class, 'addressAndDelivery'])->name('customer.sales-process.address-and-delivery');
-        Route::post('/add-address', [AddressController::class, 'addAddress'])->name('customer.sales-process.add-address');
-        Route::put('/update-address/{address}', [AddressController::class, 'updateAddress'])->name('customer.sales-process.update-address');
-        Route::get('/get-cities/{province}', [AddressController::class, 'getCities'])->name('customer.sales-process.get-cities');
-        Route::post('/choose-address-and-delivery', [AddressController::class, 'chooseAddressAndDelivery'])->name('customer.sales-process.choose-address-and-delivery');
+    // Route::middleware('profile.completion')->group(function () {
+    //     //address
+    //     Route::get('/address-and-delivery', [AddressController::class, 'addressAndDelivery'])->name('customer.sales-process.address-and-delivery');
+    //     Route::post('/add-address', [AddressController::class, 'addAddress'])->name('customer.sales-process.add-address');
+    //     Route::put('/update-address/{address}', [AddressController::class, 'updateAddress'])->name('customer.sales-process.update-address');
+    //     Route::get('/get-cities/{province}', [AddressController::class, 'getCities'])->name('customer.sales-process.get-cities');
+    //     Route::post('/choose-address-and-delivery', [AddressController::class, 'chooseAddressAndDelivery'])->name('customer.sales-process.choose-address-and-delivery');
 
         //payment
         Route::get('/payment', [CustomerPaymentController::class, 'payment'])->name('customer.sales-process.payment');
         Route::post('/copan-discount', [CustomerPaymentController::class, 'copanDiscount'])->name('customer.sales-process.copan-discount');
+        Route::get('/factor', [CustomerPaymentController::class, 'factor'])->name('customer.sales-process.factor');
+
     });
 
-});
+
 
 Route::namespace ('Market')->group(function () {
 

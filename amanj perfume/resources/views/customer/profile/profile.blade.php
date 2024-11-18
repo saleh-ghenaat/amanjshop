@@ -1,6 +1,24 @@
 @extends('customer.layouts.master-one-col')
 
 @section('content')
+
+<!-- start breadcroumb -->
+
+<div class="bread-crumb py-4">
+    <div class="container-fluid">
+        <nav aria-label="breadcrumb" class="my-lg-0 my-2">
+            <ol class="breadcrumb mb-0">
+                <li class="breadcrumb-item"><a href="{{route('customer.home')}}" class="font-14 text-muted-two">خانه</a></li>
+
+                <li class="breadcrumb-item active main-color-one-color font-14 fw-bold" aria-current="page"> پروفایل
+                </li>
+            </ol>
+        </nav>
+    </div>
+</div>
+
+<!-- end breadcroumb -->
+
 <div class="content">
     <div class="container-fluid">
 
@@ -68,41 +86,7 @@
                             <img src="assets/img/logo.png" alt="" class="img-fluid" width="200">
                         </a>
                     </div>
-                    <div class="penel-nav">
-                        <div class="panel-nav-nav">
-                            <nav class="navbar profile-box-nav">
-                                <ul class="navbar-nav flex-column">
-                                    <li class="nav-item active"><a href="{{ route('customer.profile.profile') }}" class="nav-link">
-                                            <i class="bi bi-house-door"></i>پروفایل</a>
-                                    </li>
-                                    <li class="nav-item"><a href="{{ route('customer.profile.orders') }}" class="nav-link">
-                                            <i class="bi bi-cart-check"></i>سفارش های من <span class="badge rounded-pill badge-spn">5</span></a>
-                                    </li>
-                                    <li class="nav-item"><a href="" class="nav-link">
-                                            <i class="bi bi-pin-map"></i>آدرس های من</a>
-                                    </li>
-                                    <li class="nav-item"><a href="" class="nav-link">
-                                            <i class="bi bi-bell"></i>پیام ها و اطلاعیه ها</a>
-                                    </li>
-                                    <li class="nav-item"><a href="" class="nav-link">
-                                            <i class="bi bi-chat-dots"></i>نظرات من</a>
-                                    </li>
-                                    <li class="nav-item"><a href="" class="nav-link">
-                                            <i class="bi bi-question-circle"></i>درخواست پشتیبانی</a>
-                                    </li>
-                                    <li class="nav-item"><a href="{{ route('customer.profile.my-favorites') }}" class="nav-link">
-                                            <i class="bi bi-heart"></i>محصولات مورد علاقه</a>
-                                    </li>
-                                    <li class="nav-item"><a href="" class="nav-link">
-                                            <i class="bi bi-gift"></i>کد های تخفیف من</a>
-                                    </li>
-                                    <li class="nav-item"><a href="" class="nav-link">
-                                            <i class="bi bi-arrow-right-square"></i>خروج از حساب کاربری</a>
-                                    </li>
-                                </ul>
-                            </nav>
-                        </div>
-                    </div>
+                   @include('customer.layouts.sidebar')
                 </div>
                 <div class="col-lg-9">
                     <div class="position-sticky top-0">
@@ -261,5 +245,11 @@
     </div>
 
 </div>
+<!--start cart canvas-->
+
+@include('customer.layouts.cartbar')
+
+<!--end cart canvas-->
+
 
 @endsection

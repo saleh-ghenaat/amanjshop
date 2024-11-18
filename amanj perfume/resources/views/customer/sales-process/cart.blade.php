@@ -1,286 +1,325 @@
-@extends('customer.layouts.master-two-col')
+@extends('customer.layouts.master-one-col')
 
 @section('head-tag')
-<title>سبد خرید شما</title>
+<title>لیست علاقه مندی های شما</title>
 @endsection
 
 
 @section('content')
 
-<!-- start cart -->
-<section class="mb-4">
-    <section class="container-xxl" >
-        <section class="row">
-            <section class="col">
-                <!-- start vontent header -->
-                <section class="content-header">
-                    <section class="d-flex justify-content-between align-items-center">
-                        <h2 class="content-header-title">
-                            <span>سبد خرید شما</span>
-                        </h2>
-                        <section class="content-header-link">
-                            <!--<a href="#">مشاهده همه</a>-->
-                        </section>
-                    </section>
-                </section>
-
-                <section class="row mt-4">
-                    <section class="col-md-9 mb-3">
-                            <form action="" id="cart_items" method="post" class="content-wrapper bg-white p-3 rounded-2">
-                                @csrf
-                                @php
-                                    $totalProductPrice = 0;
-                                    $totalDiscount = 0;
-                                @endphp
-
-                                @foreach ($cartItems as $cartItem)
-                                @php
-                                    $totalProductPrice += $cartItem->cartItemProductPrice();
-                                    $totalDiscount += $cartItem->cartItemProductDiscount();
-                                @endphp
-
-                            <section class="cart-item d-md-flex py-3">
-                                <section class="cart-img align-self-start flex-shrink-1">
-                                    <img src="{{ asset($cartItem->product->image['indexArray']['medium']) }}" alt="">
-                                </section>
-                                <section class="align-self-start w-100">
-                                    <p class="fw-bold">{{ $cartItem->product->name }}</p>
-                                    <p>
-                                        @if(!empty($cartItem->color))
-                                        <span style="background-color: {{ $cartItem->color->color }};" class="cart-product-selected-color me-1"></span> <span> {{ $cartItem->color->color_name }}</span>
-                                        @else
-                                        <span>رنگ منتخب وجود ندارد</span>
-                                        @endif
-                                    </p>
-                                    <p>
-                                        @if(!empty($cartItem->guarantee))
-                                        <i class="fa fa-shield-alt cart-product-selected-warranty me-1"></i> <span> {{ $cartItem->guarantee->name }}</span>
-                                        @else
-                                        <i class="fa fa-shield-alt cart-product-selected-warranty me-1"></i> <span> گارانتی ندارد</span>
-                                        @endif
-                                    </p>
-                                    <p><i class="fa fa-store-alt cart-product-selected-store me-1"></i> <span>کالا موجود در انبار</span></p>
-                                    <section>
-                                        <section class="cart-product-number d-inline-block ">
-                                            <button class="cart-number cart-number-down" type="button">-</button>
-                                            <input class="number" name="number[{{ $cartItem->id }}]" data-product-price={{ $cartItem->cartItemProductPrice() }} data-product-discount={{ $cartItem->cartItemProductDiscount() }}  type="number" min="1" max="5" step="1" value="{{ $cartItem->number }}" readonly="readonly">
-                                            <button class="cart-number cart-number-up" type="button">+</button>
-                                        </section>
-                                        <a class="text-decoration-none ms-4 cart-delete" href="{{ route('customer.sales-process.remove-from-cart', $cartItem) }}"><i class="fa fa-trash-alt"></i> حذف از سبد</a>
-                                    </section>
-                                </section>
-                                <section class="align-self-end flex-shrink-1">
-                                    @if(!empty($cartItem->product->activeAmazingSales()))
-                                    <section class="cart-item-discount text-danger text-nowrap mb-1">تخفیف {{ priceFormat($cartItem->cartItemProductDiscount()) }}</section>
-                                    @endif
-                                    <section class="text-nowrap fw-bold">{{ priceFormat($cartItem->cartItemProductPrice()) }} تومان</section>
-                                </section>
-                            </section>
-                            @endforeach
 
 
+<!-- start content -->
 
-                        </form>
+<!-- start breadcroumb -->
 
-                    </section>
-                    <section class="col-md-3">
-                        <section class="content-wrapper bg-white p-3 rounded-2 cart-total-price">
-                            <section class="d-flex justify-content-between align-items-center">
-                                <p class="text-muted">قیمت کالاها ({{ $cartItem->count() }})</p>
-                                <p class="text-muted" id="total_product_price">{{ priceFormat($totalProductPrice) }} تومان</p>
-                            </section>
+<div class="bread-crumb py-4">
+    <div class="container-fluid">
+        <nav aria-label="breadcrumb" class="my-lg-0 my-2">
+            <ol class="breadcrumb mb-0">
+                <li class="breadcrumb-item"><a href="{{route('customer.home')}}" class="font-14 text-muted-two">خانه</a></li>
 
-                            <section class="d-flex justify-content-between align-items-center">
-                                <p class="text-muted">تخفیف کالاها</p>
-                                <p class="text-danger fw-bolder" id="total_discount">{{ priceFormat($totalDiscount) }} تومان</p>
-                            </section>
-                            <section class="border-bottom mb-3"></section>
-                            <section class="d-flex justify-content-between align-items-center">
-                                <p class="text-muted">جمع سبد خرید</p>
-                                <p class="fw-bolder" id="total_price">{{ priceFormat($totalProductPrice - $totalDiscount) }} تومان</p>
-                            </section>
+                <li class="breadcrumb-item active main-color-one-color font-14 fw-bold" aria-current="page"> سبد خرید
+                </li>
+            </ol>
+        </nav>
+    </div>
+</div>
 
-                            <p class="my-3">
-                                <i class="fa fa-info-circle me-1"></i>کاربر گرامی  خرید شما هنوز نهایی نشده است. برای ثبت سفارش و تکمیل خرید باید ابتدا آدرس خود را انتخاب کنید و سپس نحوه ارسال را انتخاب کنید. نحوه ارسال انتخابی شما محاسبه و به این مبلغ اضافه شده خواهد شد. و در نهایت پرداخت این سفارش صورت میگیرد.
-                            </p>
+<!-- end breadcroumb -->
+
+<div class="content">
+    <div class="container-fluid">
+
+        <div class="payment_navigtions">
+            <div class="checkout-headers cart">
+                <ul>
+                    <li class="nav active">
+                        <a href="">
+                            <i class="bi bi-cart"></i>
+                            <p>سبد خرید</p>
+                        </a>
+                    </li>
+                    <li class="nav">
+                        <a href="">
+                            <i class="bi bi-truck"></i>
+                            <p>صورتحساب</p>
+                        </a>
+                    </li>
+                    <li class="nav">
+                        <i class="bi bi-card-list"></i>
+                        <p>فاکتور</p>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="container-fluid">
+        <div class="cart-product">
+            <div class="row gy-4">
+                <div class="col-lg-9">
+                    <div class="cart-product-item">
+                        <div class="content-box">
+                            <div class="container-fluid">
+                                <div class="cart-items">
+                                    <div class="item">
+                                        <div class="row gy-2">
+                                            <div class="col-md-2 w-100-in-400">
+                                                <div class="image">
+                                                    <img src="assets/img/product/wach1.jpg" alt=""
+                                                         class="img-fluid">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-10 w-100-in-400">
+                                                <div class="d-flex justify-content-between align-items-md-start align-items-end flex-wrap">
+                                                    <div class="d-flex align-items-start flex-column me-2">
+                                                        <div class="title d-flex align-items-center flex-wrap">
+                                                            <h6 class="font-16">لپ تاپ 14.2
+                                                                اینچی اپل مدل 2021 MacBook MKGR3 M1 Pro <span
+                                                                        class="badge ms-2 danger-label rounded-pill">17%</span>
+                                                            </h6>
+                                                        </div>
+                                                        <div class="cart-item-feature d-flex flex-column align-items-start flex-wrap mt-3">
+                                                            <div class="item d-flex align-items-center">
+                                                                <div class="icon"><i class="bi bi-shop"></i></div>
+                                                                <div class="saller-name mx-2">فروشنده:</div>
+                                                                <div class="saller-name text-muted">ایران موبایل</div>
+                                                            </div>
+                                                            <div class="item d-flex align-items-center mt-2">
+                                                                <div class="icon"><i class="bi bi-shield-check"></i>
+                                                                </div>
+                                                                <div class="saller-name mx-2">گارانتی:</div>
+                                                                <div class="saller-name text-muted">ایران موبایل</div>
+                                                            </div>
+                                                            <div class="item d-flex align-items-center mt-3">
+                                                                <div class="counter">
+                                                                    <input type="text" name="count" class="counter"
+                                                                           value="1">
+                                                                </div>
+                                                                <div class="remove danger-label ms-3">
+                                                                    <a href="" class="">
+                                                                        <i class="bi bi-trash-fill"></i>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="action d-flex flex-wrap flex-column justify-content-sm-end justify-content-center align-items-center">
+                                                        <div class="product-box-price flex-column justify-content-end align-items-end">
+                                                            <div class="product-box-price-discount mb-3">
+                                                                <del>2,500,000</del>
+                                                            </div>
+                                                            <div class="product-box-price-price d-flex">
+                                                                <h5 class="title-font main-color-green-color h2 mb-2">
+                                                                    799,000</h5>
+                                                                <p class="mb-0 text-muted-two ms-1 ">تومان</p>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="mt-2">
+                                                            <a href=""
+                                                               class="btn btn-sm main-color-one-outline  rounded-pill"><i
+                                                                    class="bi bi-plus-circle me-1"></i> ذخیره در لیست
+                                                                خرید بعدی</a>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cart-product-item mt-3">
+                        <div class="content-box">
+                            <div class="container-fluid">
+                                <div class="cart-items">
+                                    <div class="item">
+                                        <div class="row gy-2">
+                                            <div class="col-md-2 w-100-in-400">
+                                                <div class="image">
+                                                    <img src="assets/img/product/wach3.jpg" alt=""
+                                                         class="img-fluid">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-10 w-100-in-400">
+                                                <div class="d-flex justify-content-between align-items-md-start align-items-end flex-wrap">
+                                                    <div class="d-flex align-items-start flex-column me-2">
+                                                        <div class="title d-flex align-items-center flex-wrap">
+                                                            <h6 class="font-16">لپ تاپ 14.2
+                                                                اینچی اپل مدل 2021 MacBook MKGR3 M1 Pro <span
+                                                                        class="badge ms-2 danger-label rounded-pill">17%</span>
+                                                            </h6>
+                                                        </div>
+                                                        <div class="cart-item-feature d-flex flex-column align-items-start flex-wrap mt-3">
+                                                            <div class="item d-flex align-items-center">
+                                                                <div class="icon"><i class="bi bi-shop"></i></div>
+                                                                <div class="saller-name mx-2">فروشنده:</div>
+                                                                <div class="saller-name text-muted">ایران موبایل</div>
+                                                            </div>
+                                                            <div class="item d-flex align-items-center mt-2">
+                                                                <div class="icon"><i class="bi bi-shield-check"></i>
+                                                                </div>
+                                                                <div class="saller-name mx-2">گارانتی:</div>
+                                                                <div class="saller-name text-muted">ایران موبایل</div>
+                                                            </div>
+                                                            <div class="item d-flex align-items-center mt-3">
+                                                                <div class="counter">
+                                                                    <input type="text" name="count" class="counter"
+                                                                           value="1">
+                                                                </div>
+                                                                <div class="remove danger-label ms-3">
+                                                                    <a href="" class="">
+                                                                        <i class="bi bi-trash-fill"></i>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="action d-flex flex-wrap flex-column justify-content-sm-end justify-content-center align-items-center">
+                                                        <div class="product-box-price flex-column justify-content-end align-items-end">
+                                                            <div class="product-box-price-discount mb-3">
+                                                                <del>2,500,000</del>
+                                                            </div>
+                                                            <div class="product-box-price-price d-flex">
+                                                                <h5 class="title-font main-color-green-color h2 mb-2">
+                                                                    799,000</h5>
+                                                                <p class="mb-0 text-muted-two ms-1 ">تومان</p>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="mt-2">
+                                                            <a href=""
+                                                               class="btn btn-sm main-color-one-outline rounded-pill"><i
+                                                                    class="bi bi-plus-circle me-1"></i> ذخیره در لیست
+                                                                خرید بعدی</a>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="cart-canvases position-sticky top-0">
+                        <div class="item">
+                            <div class="factor">
+                                <div class="d-flex factor-item mb-3 align-items-center justify-content-between">
+                                    <h5 class="title-font mb-0 h6">قیمت کالا ها</h5>
+                                    <p class="mb-0 font-17">1,228,000 تومان</p>
+                                </div>
+
+                                <div class="d-flex factor-item mb-3 align-items-center justify-content-between">
+                                    <h5 class="title-font mb-0 h6">تخفیف کالا ها</h5>
+                                    <p class="mb-0 font-18">1,296,000 تومان</p>
+                                </div>
+
+                                <div class="d-flex factor-item flex-column mb-3 align-items-start justify-content-between">
+                                    <h5 class="title-font mb-0 h6">حمل و نقل</h5>
+                                    <form action="">
+                                        <div class="form-check mt-3">
+                                            <input type="radio" checked class="form-check-input" name="post"
+                                                   id="post-1">
+                                            <label for="post-1" class="form-check-label">
+                                                پیک موتوری اختصاصی (کمتر از 5 ساعت): 80,000 تومان
+                                            </label>
+                                        </div>
+                                        <div class="form-check mt-3">
+                                            <input type="radio" class="form-check-input" name="post" id="post-2">
+                                            <label for="post-2" class="form-check-label">
+                                                پیک عمومی شاهان (2 تا 3 روز کاری): 50,000 تومان
+
+                                            </label>
+                                        </div>
+                                    </form>
+                                </div>
+
+                                <div class="d-flex factor-item mb-3 align-items-center justify-content-between">
+                                    <h5 class="title-font mb-0 h6">مجموع</h5>
+                                    <p class="mb-0 font-18">1,308,000 تومان</p>
+                                </div>
+
+                                <div class="action mt-3 d-flex align-items-center justify-content-center">
+                                    <a href="{{route('customer.sales-process.payment')}}"
+                                       class="btn main-color-one-outline py-2 rounded-pill rounded-3 d-block w-100">تسویه
+                                        حساب</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="show-discount-modal pointer py-3 mb-3" data-bs-toggle="modal" data-bs-target="#discountModal">
+            <i class="bi bi-patch-exclamation main-color-one-color me-2" style="font-size: 40px;"></i>
+            کوپن تخفیف دارید برای نوشتن کد اینجا کلیک
+            کنید
+        </div>
+    </div>
+
+</div>
 
 
-                            <section class="">
-                                <button onclick="document.getElementById('cart_items').submit();" class="btn btn-danger d-block">تکمیل فرآیند خرید</button>
-                            </section>
+<!-- end content -->
 
-                        </section>
-                    </section>
-                </section>
-            </section>
-        </section>
+<div class="mobile-footer d-lg-none d-flex">
+    <div class="parent">
+        <div class="item" onclick="topFunction()">
+            <i class="bi bi-chevron-up font-20"></i>
+        </div>
+        <div class="item">
+            <a href="index.html">
+                <i class="bi bi-house font-20"></i>
+            </a>
+        </div>
+        <div class="item item-float">
+            <a href="#offcanvasCart" data-bs-toggle="offcanvas" href="#offcanvasCart" role="button"
+               aria-controls="offcanvasCart">
+                <i class="bi bi-bag font-20"></i>
+            </a>
+        </div>
+        <div class="item ">
+            <a href="index.html">
+                <i class="bi bi-archive"></i>
+            </a>
+        </div>
+        <div class="item">
+            <a href="index.html">
+                <i class="bi bi-person"></i>
+            </a>
+        </div>
+    </div>
+</div>
 
-    </section>
-</section>
-<!-- end cart -->
+<!-- end mobile menu -->
 
+<!--start cart canvas-->
 
+@include('customer.layouts.cartbar')
 
+<!--end cart canvas-->
 
-
-
-<section class="mb-4">
-    <section class="container-xxl" >
-        <section class="row">
-            <section class="col">
-                <section class="content-wrapper bg-white p-3 rounded-2">
-                    <!-- start vontent header -->
-                    <section class="content-header">
-                        <section class="d-flex justify-content-between align-items-center">
-                            <h2 class="content-header-title">
-                                <span>کالاهای مرتبط با سبد خرید شما</span>
-                            </h2>
-                            <section class="content-header-link">
-                                <!--<a href="#">مشاهده همه</a>-->
-                            </section>
-                        </section>
-                    </section>
-                    <!-- start vontent header -->
-                    <section class="lazyload-wrapper" >
-                        <section class="lazyload light-owl-nav owl-carousel owl-theme">
-
-
-                            @foreach ($relatedProducts as $relatedProduct)
-
-                            <section class="item">
-                                <section class="lazyload-item-wrapper">
-                                    <section class="product">
-                                        <section class="product-add-to-cart"><a href="#" data-bs-toggle="tooltip" data-bs-placement="left" title="افزودن به سبد خرید"><i class="fa fa-cart-plus"></i></a></section>
-                                        @guest
-                                        <section class="product-add-to-favorite">
-                                            <button class="btn btn-light btn-sm text-decoration-none" data-url="{{ route('customer.market.add-to-favorite', $relatedProduct) }}" data-bs-toggle="tooltip" data-bs-placement="left" title="اضافه از علاقه مندی">
-                                                <i class="fa fa-heart"></i>
-                                            </button>
-                                        </section>
-                                        @endguest
-                                        @auth
-                                            @if ($relatedProduct->user->contains(auth()->user()->id))
-                                            <section class="product-add-to-favorite">
-                                                <button class="btn btn-light btn-sm text-decoration-none" data-url="{{ route('customer.market.add-to-favorite', $relatedProduct) }}" data-bs-toggle="tooltip" data-bs-placement="left" title="حذف از علاقه مندی">
-                                                    <i class="fa fa-heart text-danger"></i>
-                                                </button>
-                                            </section>
-                                            @else
-                                            <section class="product-add-to-favorite">
-                                                <button class="btn btn-light btn-sm text-decoration-none" data-url="{{ route('customer.market.add-to-favorite', $relatedProduct) }}" data-bs-toggle="tooltip" data-bs-placement="left" title="اضافه به علاقه مندی">
-                                                    <i class="fa fa-heart"></i>
-                                                </button>
-                                            </section>
-                                            @endif
-                                        @endauth
-                                           <a class="product-link" href="#">
-                                            <section class="product-image">
-                                                <img class="" src="{{ asset($relatedProduct->image['indexArray']['medium']) }}" alt="">
-                                            </section>
-                                            <section class="product-name"><h3>{{ $relatedProduct->name }}</h3></section>
-                                            <section class="product-price-wrapper">
-                                                <section class="product-price">{{ priceFormat($relatedProduct->price) }} تومان</section>
-                                            </section>
-                                            <section class="product-colors">
-                                                @foreach ($relatedProduct->colors()->get() as $color)
-                                                <section class="product-colors-item" style="background-color: {{ $color->color }};"></section>
-                                                @endforeach
-                                            </section>
-                                        </a>
-                                    </section>
-                                </section>
-                            </section>
-
-                            @endforeach
-
-                        </section>
-                    </section>
-                </section>
-            </section>
-        </section>
-    </section>
-</section>
-
-
-
-
-
-@endsection
-
-
-@section('script')
-
-<script>
-    $(document).ready(function(){
-        bill();
-
-        $('.cart-number').click(function() {
-            bill();
-        })
-    })
-
-
-    function bill() {
-        var total_product_price = 0;
-        var total_discount = 0;
-        var total_price = 0;
-
-        $('.number').each(function() {
-            var productPrice = parseFloat($(this).data('product-price'));
-            var productDiscount = parseFloat($(this).data('product-discount'));
-            var number = parseFloat($(this).val());
-
-            total_product_price += productPrice * number;
-            total_discount += productDiscount * number;
-        })
-
-        total_price = total_product_price - total_discount;
-
-        $('#total_product_price').html(toFarsiNumber(total_product_price));
-        $('#total_discount').html(toFarsiNumber(total_discount));
-        $('#total_price').html(toFarsiNumber(total_price));
-
-
-        function toFarsiNumber(number)
-        {
-            const farsiDigits = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
-            // add comma
-            number = new Intl.NumberFormat().format(number);
-            //convert to persian
-            return number.toString().replace(/\d/g, x => farsiDigits[x]);
-        }
-
-    }
-
-</script>
-
-
-<script>
-    $('.product-add-to-favorite button').click(function() {
-       var url = $(this).attr('data-url');
-       var element = $(this);
-       $.ajax({
-           url : url,
-           success : function(result){
-            if(result.status == 1)
-            {
-                $(element).children().first().addClass('text-danger');
-                $(element).attr('data-original-title', 'حذف از علاقه مندی ها');
-                $(element).attr('data-bs-original-title', 'حذف از علاقه مندی ها');
-            }
-            else if(result.status == 2)
-            {
-                $(element).children().first().removeClass('text-danger')
-                $(element).attr('data-original-title', 'افزودن از علاقه مندی ها');
-                $(element).attr('data-bs-original-title', 'افزودن از علاقه مندی ها');
-            }
-            else if(result.status == 3)
-            {
-                $('.toast').toast('show');
-            }
-           }
-       })
-    })
-</script>
-
+<div class="float-btn">
+    <div class="container-fluid">
+        <!-- contact us floating -->
+        <div id="btncollapzion" class=" btn_collapzion"></div>
+        <div class="" id="contactOverlay"></div>
+        <!-- end contact us floating -->
+    </div>
+</div>
 @endsection

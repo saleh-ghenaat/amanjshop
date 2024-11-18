@@ -40,7 +40,7 @@
                                             @enderror
 
                                             <div class="form-group">
-                                                <button type="submit" class="btn btn-success w-100 mt-4 btn-login">وورد به
+                                                <button type="submit" class="btn btn-success w-100 mt-4 btn-login">ورود به
                                                     سایت
                                                 </button>
                                             </div>

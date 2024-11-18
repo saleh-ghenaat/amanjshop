@@ -16,7 +16,7 @@
             </div>
             <div class="col-xl-5 d-xl-block d-none">
                 <div class="header-form">
-                    <form action="">
+                    <form action="{{route('customer.search')}}">
                         <input type="search" class="form-control input-search" placeholder="جستجوی محصول">
                         <button type="submit" class="btn input-btn-search"><i class="bi bi-search"></i></button>
                     </form>
@@ -38,8 +38,8 @@
                         </button>
                         <section class="dropdown-menu dropdown-menu-end custom-drop-down" aria-labelledby="dropdownMenuButton1">
                             <section><a class="dropdown-item" href="{{ route('customer.profile.profile') }}"><i class="fa fa-user-circle"></i>پروفایل کاربری</a></section>
-                            <section><a class="dropdown-item" href="#"><i class="fa fa-newspaper"></i>سفارشات</a></section>
-                            <section><a class="dropdown-item" href="#"><i class="fa fa-heart"></i>لیست علاقه مندی</a></section>
+                            <section><a class="dropdown-item" href="{{route('customer.profile.orders')}}"><i class="fa fa-newspaper"></i>سفارشات</a></section>
+                            <section><a class="dropdown-item" href="{{route('customer.profile.my-favorites')}}"><i class="fa fa-heart"></i>لیست علاقه مندی</a></section>
                             <section>
                                 <hr class="dropdown-divider">
                             </section>
@@ -57,7 +57,7 @@
                         <a href="" class="btn"><i class="bi bi-person-fill fs-2"></i></a>
                     </div>
                     <div class="header-btn-favorite">
-                        <a href="" class="btn"><i class="bi bi-heart"></i></a>
+                        <a href="{{route('customer.profile.my-favorites')}}" class="btn"><i class="bi bi-heart"></i></a>
                     </div>
                 </div>
             </div>
@@ -445,69 +445,17 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <li class="nav-item"><a href="" class="nav-link header-top-menu-link-a  ">مگا
-                                    لیست منو
-                                    <i class="bi bi-tablet"></i></a>
-                                    <ul class="list-unstyled shadow-lg back-menu sub-menu mega-container"
-                                        style="background: #fff url('assets/img/mega-img-1.jpg') no-repeat;background-size: 400px !important;">
-                                        <li><a href="" class="title">بـرند</a></li>
-                                        <li><a href="">سامـسونگ</a></li>
-                                        <li><a href="">اپـل</a></li>
-                                        <li><a href="">شیـائومی</a></li>
-                                        <li><a href="">ال جی</a></li>
-                                        <li><a href="">وان پـلاس</a></li>
-                                        <li><a href="">جی ال ایـکس</a></li>
-                                        <li><a href="">هـو آوی</a></li>
-                                        <li><a href="">بلک بـری</a></li>
-                                        <li><a href="">توشـیبا</a></li>
-                                        <li><a href="">دایـناکورد</a></li>
-                                        <li><a href="" class="title">براساس رده بندی </a>
-                                        </li>
-                                        <li><a href="">دکـمه ای</a></li>
-                                        <li><a href="">لـمسـی</a></li>
-                                        <li><a href="">نـظـامی</a></li>
-                                        <li><a href="">ضـد آب</a></li>
-                                        <li><a href="">مسـافرتی</a></li>
-                                        <li><a href="">خـارنی</a></li>
-                                        <li><a href="" class="title">براساس کشور </a></li>
-                                        <li><a href="">ایران</a></li>
-                                        <li><a href="">ژاپن</a></li>
-                                        <li><a href="">فرانسه</a></li>
-                                        <li><a href="">کره جنوبی</a></li>
-                                        <li><a href="">آمریکا</a></li>
-                                        <li><a href="">سوئد</a></li>
-                                        <li><a href="">تایوان</a></li>
-                                        <li><a href="" class="title">براساس رنگ</a></li>
-                                        <li><a href="">قرمز</a></li>
-                                        <li><a href="">قهوه ای</a></li>
-                                        <li><a href="">سبز</a></li>
-                                        <li><a href="">بنفش</a></li>
-                                        <li><a href="">نارنجی</a></li>
-                                        <li><a href="">نیلی</a></li>
-                                    </ul>
+                                <li class="nav-item"><a href="{{route('customer.home')}}" class="nav-link header-top-menu-link-a  ">صفحه اصلی
+                                    <i class="bi bi-house"></i></a>
+
                                 </li>
-                                <li class="nav-item"><a href="" class="nav-link  header-top-menu-link-a ">منو
-                                    ساده<i class="bi bi-menu-app"></i></a>
-                                    <ul class="level-one">
-                                        <li><a href="">منو شماره 1</a></li>
-                                        <li><a href="">منو شماره 2</a></li>
-                                        <li class="position-relative"><a href="">منو شماره 3 <i
-                                                class="bi bi-chevron-left"></i></a>
-                                            <ul class="level-two">
-                                                <li><a href="">زیر منو شماره 1</a></li>
-                                                <li><a href="">2 زیر منو شماره </a></li>
-                                                <li><a href="">3 زیر منو شماره </a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="">منو شماره 4</a></li>
-                                        <li><a href="">منو شماره 5</a></li>
-                                        <li><a href="">منو شماره 6</a></li>
-                                    </ul>
+
+                                <li class="nav-item"><a href="{{route('customer.about')}}" class="nav-link  header-top-menu-link-a ">درباره ما<i class="bi bi-menu-app"></i></a>
+
                                 </li>
-                                <li class="nav-item"><a href="" class="nav-link header-top-menu-link-a  ">
-                                    تخفیف ها و پیشنهاد ها <i class="bi bi-tag"></i></a></li>
-                                <li class="nav-item"><a href="" class="nav-link header-top-menu-link-a  ">سوالی
-                                    دارید</a>
+                                <li class="nav-item"><a href="{{route('customer.contact')}}" class="nav-link header-top-menu-link-a  ">
+                                    ارتباط با ما <i class="bi bi-telephone"></i></a></li>
+                                <li class="nav-item"><a href="{{route('customer.faq')}}" class="nav-link header-top-menu-link-a  ">سوالات متداول<i class="bi bi-question"></i></a>
                                 </li>
                             </ul>
                         </div>

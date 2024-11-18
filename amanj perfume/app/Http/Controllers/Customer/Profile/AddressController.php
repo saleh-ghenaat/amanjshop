@@ -9,7 +9,6 @@ class AddressController extends Controller
 {
     public function index()
     {
-        $provinces = Province::all();
-        return view('customer.profile.my-addresses', compact('provinces'));
+        return view('customer.profile.my-addresses');
     }
 }

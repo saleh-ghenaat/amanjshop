@@ -16,10 +16,10 @@
     <div class="container-fluid">
         <nav aria-label="breadcrumb" class="my-lg-0 my-2">
             <ol class="breadcrumb mb-0">
-                <li class="breadcrumb-item"><a href="#" class="font-14 text-muted-two">خانه</a></li>
-                <li class="breadcrumb-item"><a href="#" class="font-14 text-muted-two">فروشگاه</a></li>
-                <li class="breadcrumb-item"><a href="#" class="font-14 text-muted-two">گوشی هوشمند</a></li>
-                <li class="breadcrumb-item active main-color-one-color font-14 fw-bold" aria-current="page">گوشی شیائومی
+                <li class="breadcrumb-item"><a href="{{route('customer.home')}}" class="font-14 text-muted-two">خانه</a></li>
+                <li class="breadcrumb-item"><a href="{{route('customer.profile.profile')}}" class="font-14 text-muted-two">پروفایل</a></li>
+
+                <li class="breadcrumb-item active main-color-one-color font-14 fw-bold" aria-current="page">ویرایش پروفایل
                 </li>
             </ol>
         </nav>
@@ -98,41 +98,7 @@
                             <img src="assets/img/logo.png" alt="" class="img-fluid" width="200">
                         </a>
                     </div>
-                    <div class="penel-nav">
-                        <div class="panel-nav-nav">
-                            <nav class="navbar profile-box-nav">
-                                <ul class="navbar-nav flex-column">
-                                    <li class="nav-item active"><a href="{{ route('customer.profile.profile') }}" class="nav-link">
-                                            <i class="bi bi-house-door"></i>پروفایل</a>
-                                    </li>
-                                    <li class="nav-item"><a href="{{ route('customer.profile.orders') }}" class="nav-link">
-                                            <i class="bi bi-cart-check"></i>سفارش های من <span class="badge rounded-pill badge-spn">5</span></a>
-                                    </li>
-                                    <li class="nav-item"><a href="" class="nav-link">
-                                            <i class="bi bi-pin-map"></i>آدرس های من</a>
-                                    </li>
-                                    <li class="nav-item"><a href="" class="nav-link">
-                                            <i class="bi bi-bell"></i>پیام ها و اطلاعیه ها</a>
-                                    </li>
-                                    <li class="nav-item"><a href="" class="nav-link">
-                                            <i class="bi bi-chat-dots"></i>نظرات من</a>
-                                    </li>
-                                    <li class="nav-item"><a href="" class="nav-link">
-                                            <i class="bi bi-question-circle"></i>درخواست پشتیبانی</a>
-                                    </li>
-                                    <li class="nav-item"><a href="{{ route('customer.profile.my-favorites') }}" class="nav-link">
-                                            <i class="bi bi-heart"></i>محصولات مورد علاقه</a>
-                                    </li>
-                                    <li class="nav-item"><a href="" class="nav-link">
-                                            <i class="bi bi-gift"></i>کد های تخفیف من</a>
-                                    </li>
-                                    <li class="nav-item"><a href="" class="nav-link">
-                                            <i class="bi bi-arrow-right-square"></i>خروج از حساب کاربری</a>
-                                    </li>
-                                </ul>
-                            </nav>
-                        </div>
-                    </div>
+                  @include('customer.layouts.sidebar')
                 </div>
                 <div class="col-lg-9">
                     <div class="position-sticky top-0">
@@ -239,7 +205,7 @@
                                             <div class="col-12">
                                                 <div class="form-group">
                                                     <button type="submit" class="btn product-meta-add-to-cart-btn main-color-one-bg rounded-pill">
-                                                        ثبت سفارش
+                                                         ثبت ویرایش
                                                     </button>
                                                 </div>
 
@@ -260,95 +226,7 @@
 <!-- end mobile menu -->
 
 <!--start cart canvas-->
-
-<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasCart" aria-labelledby="offcanvasCartLabel">
-    <div class="offcanvas-header shadow-md">
-        <h5 class="offcanvas-title title-font" id="offcanvasCartLabel">سبد خرید <small class="text-muted font-14 ms-1">(1
-                مورد)</small></h5>
-        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-    </div>
-
-    <div class="offcanvas-body">
-        <ul class="navbar-nav cart-canvas-parent">
-            <li class="nav-item">
-                <div class="cart-canvas">
-                    <div class="row align-items-center">
-                        <div class="col-4 ps-0">
-                            <img src="assets/img/product/wach1.jpg" alt="">
-                        </div>
-                        <div class="col-8">
-                            <a href="">
-                                <h3 class="text-overflow-1 title-font font-14">ساعت مچی عقربه‌ای مردانه اینویکتا مدل
-                                    Automatico Ghost Reserve
-                                </h3>
-                                <div class="cart-canvas-price my-3 d-flex align-items-center">
-                                    <p class="mb-0 text-muted me-2 font-16 text-decoration-line-through">5,400,000</p>
-                                    <h6 class="title-font main-color-one-color">3,200,000 تومان</h6>
-                                </div>
-                            </a>
-                            <div class="cart-canvas-foot d-flex align-items-center justify-content-between">
-                                <div class="cart-canvas-count">
-                                    <span>تعداد:</span>
-                                    <span class="fw-bold main-color-one-color">3</span>
-                                </div>
-                                <div class="cart-canvas-delete">
-                                    <a href="" class="btn"><i class="bi bi-x"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </li>
-            <li class="nav-item">
-                <div class="cart-canvas">
-                    <div class="row align-items-center">
-                        <div class="col-4 ps-0">
-                            <img src="assets/img/product/wach3.jpg" alt="">
-                        </div>
-                        <div class="col-8">
-                            <a href="">
-                                <h3 class="text-overflow-1 title-font font-14">ساعت مچی عقربه‌ای مردانه اینویکتا مدل
-                                    Automatico Ghost Reserve
-                                </h3>
-                                <div class="cart-canvas-price my-3 d-flex align-items-center">
-                                    <p class="mb-0 text-muted me-2 font-16 text-decoration-line-through">5,400,000</p>
-                                    <h6 class="title-font main-color-one-color">3,200,000 تومان</h6>
-                                </div>
-                            </a>
-                            <div class="cart-canvas-foot d-flex align-items-center justify-content-between">
-                                <div class="cart-canvas-count">
-                                    <span>تعداد:</span>
-                                    <span class="fw-bold main-color-one-color">3</span>
-                                </div>
-                                <div class="cart-canvas-delete">
-                                    <a href="" class="btn"><i class="bi bi-x"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </li>
-        </ul>
-
-        <div class="cart-canvas-foots bg-white shadow-md">
-            <div class="row align-items-center">
-                <div class="col-6">
-                    <div class="cart-canvas-foot-sum">
-                        <p class="text-muted mb-2">جمع کل</p>
-                        <h5 class="title-font">11,000,000 تومان</h5>
-                    </div>
-                </div>
-                <div class="col-6">
-                    <div class="cart-canvas-foot-link text-end">
-                        <a href="" class="btn border-0 main-color-green text-white"><i
-                                class="bi bi-arrow-left me-1"></i> تکمیل خرید</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-</div>
+@include('customer.layouts.cartbar')
 
 <!--end cart canvas-->
 
@@ -397,7 +275,7 @@
             var id = address.id;
             var target = `#province-${id}`;
             var selected = `${target} option:selected`;
-            
+
             $(target).change(function() {
                 var element = $(selected);
                 var url = element.attr('data-url');
