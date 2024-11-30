@@ -24,9 +24,10 @@ class HomeController extends Controller
 
         $brands = Brand::all();
 
-        $mostVisitedProducts = Product::latest()->take(10)->get();
-        $offerProducts = Product::latest()->take(10)->get();
-        return view('customer.home', compact('slideShowImages', 'topBanners', 'middleBanners', 'bottomBanner', 'brands', 'mostVisitedProducts', 'offerProducts'));
+        $mostSoldProducts = Product::where('sold_number' , '!=' , 0)->latest()->take(10)->get();
+        $new_products = Product::latest()->take(10)->get();
+        $amazingProducts = Product::whereHas('amazingSales')->latest()->take(10)->get();
+        return view('customer.home', compact('slideShowImages', 'topBanners', 'middleBanners', 'bottomBanner', 'brands', 'mostSoldProducts', 'amazingProducts' , 'new_products'));
 
     }
 
