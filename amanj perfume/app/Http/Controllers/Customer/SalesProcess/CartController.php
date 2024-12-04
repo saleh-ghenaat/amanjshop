@@ -7,6 +7,7 @@ use App\Models\Market\Product;
 use App\Models\Market\CartItem;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rules\Exists;
 
 class CartController extends Controller
 {
@@ -15,8 +16,8 @@ class CartController extends Controller
         if(Auth::check())
         {
             $cartItems = CartItem::where('user_id', Auth::user()->id)->get();
-            $relatedProducts = Product::all();
-            return view('customer.sales-process.cart', compact('cartItems', 'relatedProducts'));
+            // $relatedProducts = Product::all();
+            return view('customer.sales-process.cart', compact('cartItems'));
         }
         else{
             return redirect()->route('auth.customer.login-register-form');
@@ -32,6 +33,9 @@ class CartController extends Controller
             {
                 $cartItem->update(['number' => $inputs['number'][$cartItem->id]]);
             }
+            // else{
+            //     $cartItem->update(['number' => $cartItem->number +1]);
+            // }
         }
         return redirect()->route('customer.sales-process.address-and-delivery');
     }
@@ -64,7 +68,12 @@ class CartController extends Controller
                     {
                         if($cartItem->number != $request->number)
                         {
-                            $cartItem->update(['number' => $request->number]);
+                            if($request->number != null){
+                                $cartItem->update(['number' => $request->number]);
+
+                            }else{
+                                $cartItem->update(['number' => $cartItem->number +1]);
+                            }
                         }
                         return back();
                     }

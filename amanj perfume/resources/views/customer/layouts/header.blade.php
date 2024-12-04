@@ -29,7 +29,7 @@
                            class="btn main-color-one-bg">
                             <i class="bi bi-basket-fill"></i>
                             <span>سبد خرید</span>
-                            <span id="cartCounter" class="cart-counter">0</span>
+                            <span id="cartCounter" class="cart-counter">{{$cartItems->count()}}</span>
                         </a>
                     </div>
                     @auth

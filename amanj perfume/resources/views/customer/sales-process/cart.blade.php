@@ -27,7 +27,7 @@
 </div>
 
 <!-- end breadcroumb -->
-
+@if($cartItems->isNotEmpty())
 <div class="content">
     <div class="container-fluid">
 
@@ -56,11 +56,23 @@
         </div>
 
     </div>
-
+    @php
+    $totalProductPrice = 0;
+    $totalDiscountPrice = 0;
+@endphp
     <div class="container-fluid">
         <div class="cart-product">
             <div class="row gy-4">
                 <div class="col-lg-9">
+                    @foreach($cartItems as $cartItem)
+                    @php
+
+                    $totalProductPrice += $cartItem->cartItemProductPrice() * $cartItem->number;
+                    $totalDiscountPrice += $cartItem->cartItemProductDiscount() * $cartItem->number;
+                    $amazingSales = $cartItem->product->activeAmazingSales();
+
+                @endphp
+
                     <div class="cart-product-item">
                         <div class="content-box">
                             <div class="container-fluid">
@@ -69,7 +81,7 @@
                                         <div class="row gy-2">
                                             <div class="col-md-2 w-100-in-400">
                                                 <div class="image">
-                                                    <img src="assets/img/product/wach1.jpg" alt=""
+                                                    <img src="{{ asset($cartItem->product->image['indexArray']['medium']) }}" alt="{{$cartItem->product->name}}"
                                                          class="img-fluid">
                                                 </div>
                                             </div>
@@ -77,9 +89,10 @@
                                                 <div class="d-flex justify-content-between align-items-md-start align-items-end flex-wrap">
                                                     <div class="d-flex align-items-start flex-column me-2">
                                                         <div class="title d-flex align-items-center flex-wrap">
-                                                            <h6 class="font-16">لپ تاپ 14.2
-                                                                اینچی اپل مدل 2021 MacBook MKGR3 M1 Pro <span
-                                                                        class="badge ms-2 danger-label rounded-pill">17%</span>
+                                                            <h6 class="font-16"> {{ $cartItem->product->name }}
+                                                                @if($amazingSales)
+                                                                <span class="badge ms-2 danger-label rounded-pill">{{$amazingSales->percentage}}%</span>
+                                                                @endif
                                                             </h6>
                                                         </div>
                                                         <div class="cart-item-feature d-flex flex-column align-items-start flex-wrap mt-3">
@@ -110,12 +123,14 @@
                                                     <div class="action d-flex flex-wrap flex-column justify-content-sm-end justify-content-center align-items-center">
                                                         <div class="product-box-price flex-column justify-content-end align-items-end">
                                                             <div class="product-box-price-discount mb-3">
-                                                                <del>2,500,000</del>
+                                                                @if($cartItem->cartItemProductDiscount())
+                                                                <del>{{ priceFormat($cartItem->cartItemProductPrice()) }}</del>
+                                                                @endif
                                                             </div>
                                                             <div class="product-box-price-price d-flex">
                                                                 <h5 class="title-font main-color-green-color h2 mb-2">
-                                                                    799,000</h5>
-                                                                <p class="mb-0 text-muted-two ms-1 ">تومان</p>
+                                                                    {{ priceFormat($cartItem->cartItemProductPrice() - $cartItem->cartItemProductDiscount()) }}</h5>
+                                                                <p class="mb-0 text-muted-two ms-1 ">ریال</p>
                                                             </div>
                                                         </div>
 
@@ -136,81 +151,9 @@
                             </div>
                         </div>
                     </div>
-                    <div class="cart-product-item mt-3">
-                        <div class="content-box">
-                            <div class="container-fluid">
-                                <div class="cart-items">
-                                    <div class="item">
-                                        <div class="row gy-2">
-                                            <div class="col-md-2 w-100-in-400">
-                                                <div class="image">
-                                                    <img src="assets/img/product/wach3.jpg" alt=""
-                                                         class="img-fluid">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-10 w-100-in-400">
-                                                <div class="d-flex justify-content-between align-items-md-start align-items-end flex-wrap">
-                                                    <div class="d-flex align-items-start flex-column me-2">
-                                                        <div class="title d-flex align-items-center flex-wrap">
-                                                            <h6 class="font-16">لپ تاپ 14.2
-                                                                اینچی اپل مدل 2021 MacBook MKGR3 M1 Pro <span
-                                                                        class="badge ms-2 danger-label rounded-pill">17%</span>
-                                                            </h6>
-                                                        </div>
-                                                        <div class="cart-item-feature d-flex flex-column align-items-start flex-wrap mt-3">
-                                                            <div class="item d-flex align-items-center">
-                                                                <div class="icon"><i class="bi bi-shop"></i></div>
-                                                                <div class="saller-name mx-2">فروشنده:</div>
-                                                                <div class="saller-name text-muted">ایران موبایل</div>
-                                                            </div>
-                                                            <div class="item d-flex align-items-center mt-2">
-                                                                <div class="icon"><i class="bi bi-shield-check"></i>
-                                                                </div>
-                                                                <div class="saller-name mx-2">گارانتی:</div>
-                                                                <div class="saller-name text-muted">ایران موبایل</div>
-                                                            </div>
-                                                            <div class="item d-flex align-items-center mt-3">
-                                                                <div class="counter">
-                                                                    <input type="text" name="count" class="counter"
-                                                                           value="1">
-                                                                </div>
-                                                                <div class="remove danger-label ms-3">
-                                                                    <a href="" class="">
-                                                                        <i class="bi bi-trash-fill"></i>
-                                                                    </a>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="action d-flex flex-wrap flex-column justify-content-sm-end justify-content-center align-items-center">
-                                                        <div class="product-box-price flex-column justify-content-end align-items-end">
-                                                            <div class="product-box-price-discount mb-3">
-                                                                <del>2,500,000</del>
-                                                            </div>
-                                                            <div class="product-box-price-price d-flex">
-                                                                <h5 class="title-font main-color-green-color h2 mb-2">
-                                                                    799,000</h5>
-                                                                <p class="mb-0 text-muted-two ms-1 ">تومان</p>
-                                                            </div>
-                                                        </div>
 
-                                                        <div class="mt-2">
-                                                            <a href=""
-                                                               class="btn btn-sm main-color-one-outline rounded-pill"><i
-                                                                    class="bi bi-plus-circle me-1"></i> ذخیره در لیست
-                                                                خرید بعدی</a>
-                                                        </div>
+                    @endforeach
 
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
                 <div class="col-lg-3">
                     <div class="cart-canvases position-sticky top-0">
@@ -218,12 +161,12 @@
                             <div class="factor">
                                 <div class="d-flex factor-item mb-3 align-items-center justify-content-between">
                                     <h5 class="title-font mb-0 h6">قیمت کالا ها</h5>
-                                    <p class="mb-0 font-17">1,228,000 تومان</p>
+                                    <p class="mb-0 font-17">{{priceFormat($totalProductPrice)}} ریال</p>
                                 </div>
 
                                 <div class="d-flex factor-item mb-3 align-items-center justify-content-between">
                                     <h5 class="title-font mb-0 h6">تخفیف کالا ها</h5>
-                                    <p class="mb-0 font-18">1,296,000 تومان</p>
+                                    <p class="mb-0 font-18">{{priceFormat($totalDiscountPrice)}} ریال</p>
                                 </div>
 
                                 <div class="d-flex factor-item flex-column mb-3 align-items-start justify-content-between">
@@ -248,7 +191,7 @@
 
                                 <div class="d-flex factor-item mb-3 align-items-center justify-content-between">
                                     <h5 class="title-font mb-0 h6">مجموع</h5>
-                                    <p class="mb-0 font-18">1,308,000 تومان</p>
+                                    <p class="mb-0 font-18">{{ priceFormat($totalProductPrice - $totalDiscountPrice) }} ریال</p>
                                 </div>
 
                                 <div class="action mt-3 d-flex align-items-center justify-content-center">
@@ -274,7 +217,35 @@
 
 </div>
 
+@else
 
+
+<div class="content">
+    <div class="container-fluid">
+        <div class="cart-empty">
+            <div class="content-box">
+                <div class="container-fluid">
+                    <div class="cart-empty-image text-center">
+                        <img src="assets/img/mini_cart-empty.png" width="300" alt="">
+                    </div>
+                    <div class="cart-empty-title">
+                        <h2 class="text-center title-font">
+                            سبد خرید شما خالی میباشد
+                        </h2>
+                        <div class="text-center mt-3">
+                            <a href="" class="btn main-color-one-outline rounded-pill px-4">رفتن به فروشگاه</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>
+
+
+@endIf
 <!-- end content -->
 
 <div class="mobile-footer d-lg-none d-flex">
@@ -310,7 +281,8 @@
 
 <!--start cart canvas-->
 
-@include('customer.layouts.cartbar')
+@include('customer.layouts.cart-canvas')
+
 
 <!--end cart canvas-->
 

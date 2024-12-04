@@ -900,11 +900,12 @@
                                             <li class="nav-item"><a href=""
                                                     class="nav-item product-box-hover-item me-3">مشاهده
                                                     محصول</a></li>
-                                            <li class="nav-item"><a href=""
-                                                    class="nav-item product-box-hover-item product-box-hover-item-btn me-1"
-                                                    data-bs-toggle="tooltip" data-bs-placement="top"
-                                                    data-bs-title="افزودن به سبد خرید"><i
-                                                        class="bi bi-basket"></i></a></li>
+                                            <li class="nav-item">
+                                                <form action="{{route('customer.sales-process.add-to-cart' , $product)}}" method="POST" enctype="multipart/form-data">
+                                                    @csrf
+                                                    <button type="submit" style="border: none;" class="nav-item product-box-hover-item product-box-hover-item-btn me-1"><i class="bi bi-basket"></i></button>
+                                                    </form>
+                                                    </li>
                                             <li class="nav-item"><a href=""
                                                     class="nav-item product-box-hover-item product-box-hover-item-btn"
                                                     data-bs-toggle="tooltip" data-bs-placement="top"
@@ -986,14 +987,14 @@
         </div>
 
         <div class="swiper mt-4 product-slider-swiper">
-            @foreach($mostSoldProducts as $product)
-            @php
-            $amazingSales = $product->activeAmazingSales();
 
-
-            @endphp
             <div class="swiper-wrapper ">
+                @foreach($mostSoldProducts as $product)
+                @php
+                $amazingSales = $product->activeAmazingSales();
 
+
+                @endphp
                 <div class="swiper-slide">
                     <div class="product-box">
                         <a href="">
@@ -1020,11 +1021,14 @@
                                         <li class="nav-item"><a href=""
                                                 class="nav-item product-box-hover-item me-3">مشاهده
                                                 محصول</a></li>
-                                        <li class="nav-item"><a href=""
-                                                class="nav-item product-box-hover-item product-box-hover-item-btn me-1"
-                                                data-bs-toggle="tooltip" data-bs-placement="top"
-                                                data-bs-title="افزودن به سبد خرید"><i
-                                                    class="bi bi-basket"></i></a></li>
+                                        <li class="nav-item">
+                                            <form action="{{route('customer.sales-process.add-to-cart' , $product)}}" method="POST" enctype="multipart/form-data">
+                                                @csrf
+
+                                            <button type="submit" style="border: none;" class="nav-item product-box-hover-item product-box-hover-item-btn me-1"><i class="bi bi-basket"></i></button>
+
+                                                </form>
+                                                </li>
                                         <li class="nav-item"><a href=""
                                                 class="nav-item product-box-hover-item product-box-hover-item-btn"
                                                 data-bs-toggle="tooltip" data-bs-placement="top"
@@ -1037,9 +1041,9 @@
                     </div>
                 </div>
 
+                @endforeach
 
             </div>
-            @endforeach
             <div class="swiper-button-next"></div>
             <div class="swiper-button-prev"></div>
 
@@ -1095,7 +1099,7 @@
                         <a href="">
                             <div class="row align-items-center">
                                 <div class="col-4">
-                                    <img src="/customer-assets/img/product/television4.jpg" alt="">
+                                    <img src="{{ asset($product->image['indexArray']['medium']) }}" alt="">
                                 </div>
                                 <div class="col-8">
                                     <h3 class="text-overflow-1 title-font font-14">{{$product->name}}
@@ -1107,7 +1111,11 @@
                                     </div>
                                     <div class="cart-canvas-foot d-flex align-items-center justify-content-end">
                                         <div class="cart-canvas-add">
+                                            <form action="{{route('customer.sales-process.add-to-cart' , $product)}}" method="post" enctype="multipart/form-data">
+                                                @csrf
+
                                             <button class="btn text-white"><i class="bi bi-basket"></i></button>
+                                        </form>
                                         </div>
                                     </div>
                                 </div>
@@ -1364,96 +1372,7 @@
 <!-- end mobile menu -->
 
 <!--start cart canvas-->
-
-<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasCart" aria-labelledby="offcanvasCartLabel">
-    <div class="offcanvas-header shadow-md">
-        <h5 class="offcanvas-title title-font" id="offcanvasCartLabel">سبد خرید <small class="text-muted font-14 ms-1">(1
-            مورد)</small></h5>
-        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-    </div>
-
-    <div class="offcanvas-body">
-        <ul class="navbar-nav cart-canvas-parent">
-            <li class="nav-item">
-                <div class="cart-canvas">
-                    <div class="row align-items-center">
-                        <div class="col-4 ps-0">
-                            <img src="/customer-assets/img/product/wach1.jpg" alt="">
-                        </div>
-                        <div class="col-8">
-                            <a href="">
-                                <h3 class="text-overflow-1 title-font font-14">ساعت مچی عقربه‌ای مردانه اینویکتا مدل
-                                    Automatico Ghost Reserve
-                                </h3>
-                                <div class="cart-canvas-price my-3 d-flex align-items-center">
-                                    <p class="mb-0 text-muted me-2 font-16 text-decoration-line-through">5,400,000</p>
-                                    <h6 class="title-font main-color-one-color">3,200,000 تومان</h6>
-                                </div>
-                            </a>
-                            <div class="cart-canvas-foot d-flex align-items-center justify-content-between">
-                                <div class="cart-canvas-count">
-                                    <span>تعداد:</span>
-                                    <span class="fw-bold main-color-one-color">3</span>
-                                </div>
-                                <div class="cart-canvas-delete">
-                                    <a href="" class="btn"><i class="bi bi-x"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </li>
-            <li class="nav-item">
-                <div class="cart-canvas">
-                    <div class="row align-items-center">
-                        <div class="col-4 ps-0">
-                            <img src="/customer-assets/img/product/wach3.jpg" alt="">
-                        </div>
-                        <div class="col-8">
-                            <a href="">
-                                <h3 class="text-overflow-1 title-font font-14">ساعت مچی عقربه‌ای مردانه اینویکتا مدل
-                                    Automatico Ghost Reserve
-                                </h3>
-                                <div class="cart-canvas-price my-3 d-flex align-items-center">
-                                    <p class="mb-0 text-muted me-2 font-16 text-decoration-line-through">5,400,000</p>
-                                    <h6 class="title-font main-color-one-color">3,200,000 تومان</h6>
-                                </div>
-                            </a>
-                            <div class="cart-canvas-foot d-flex align-items-center justify-content-between">
-                                <div class="cart-canvas-count">
-                                    <span>تعداد:</span>
-                                    <span class="fw-bold main-color-one-color">3</span>
-                                </div>
-                                <div class="cart-canvas-delete">
-                                    <a href="" class="btn"><i class="bi bi-x"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </li>
-        </ul>
-
-        <div class="cart-canvas-foots bg-white shadow-md">
-            <div class="row align-items-center">
-                <div class="col-6">
-                    <div class="cart-canvas-foot-sum">
-                        <p class="text-muted mb-2">جمع کل</p>
-                        <h5 class="title-font">11,000,000 تومان</h5>
-                    </div>
-                </div>
-                <div class="col-6">
-                    <div class="cart-canvas-foot-link text-end">
-                        <a href="" class="btn border-0 main-color-green text-white"><i
-                                class="bi bi-arrow-left me-1"></i> تکمیل خرید</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-</div>
-
+@include('customer.layouts.cart-canvas')
 <!--end cart canvas-->
 
 <div class="float-btn">

@@ -6,6 +6,7 @@ use App\Models\Market\Brand;
 use Illuminate\Http\Request;
 use App\Models\Content\Banner;
 use App\Models\Market\Product;
+use App\Models\Market\CartItem;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
@@ -23,11 +24,11 @@ class HomeController extends Controller
         $bottomBanner = Banner::where('position', 3)->where('status', 1)->first();
 
         $brands = Brand::all();
-
+        $cartItems = CartItem::where('user_id', Auth::user()->id)->get();
         $mostSoldProducts = Product::where('sold_number' , '!=' , 0)->latest()->take(10)->get();
         $new_products = Product::latest()->take(10)->get();
         $amazingProducts = Product::whereHas('amazingSales')->latest()->take(10)->get();
-        return view('customer.home', compact('slideShowImages', 'topBanners', 'middleBanners', 'bottomBanner', 'brands', 'mostSoldProducts', 'amazingProducts' , 'new_products'));
+        return view('customer.home', compact('slideShowImages', 'topBanners', 'middleBanners', 'bottomBanner', 'brands', 'mostSoldProducts', 'amazingProducts' , 'new_products' , 'cartItems'));
 
     }
 
