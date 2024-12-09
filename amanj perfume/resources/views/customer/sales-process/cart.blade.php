@@ -96,24 +96,33 @@
                                                             </h6>
                                                         </div>
                                                         <div class="cart-item-feature d-flex flex-column align-items-start flex-wrap mt-3">
-                                                            <div class="item d-flex align-items-center">
-                                                                <div class="icon"><i class="bi bi-shop"></i></div>
-                                                                <div class="saller-name mx-2">فروشنده:</div>
-                                                                <div class="saller-name text-muted">ایران موبایل</div>
-                                                            </div>
-                                                            <div class="item d-flex align-items-center mt-2">
-                                                                <div class="icon"><i class="bi bi-shield-check"></i>
-                                                                </div>
-                                                                <div class="saller-name mx-2">گارانتی:</div>
-                                                                <div class="saller-name text-muted">ایران موبایل</div>
-                                                            </div>
+                                                            @if($cartItem->product->guarantees->count() > 0)
+                                                            <p><i class="bi bi-shield-check me-1"></i>
+                                                                <select name="form-select" class="rounded px-3" id="">
+                                                                @foreach($cartItem->product->guarantees as $guarantee)
+
+                                                                    <option value="{{$guarantee->id}}">{{$guarantee->name}}</option>
+                                                                @endforeach
+
+                                                                </select>
+                                                            </p>
+                                                            @else
+                                                            فاقد گارانتی
+                                                            @endif
                                                             <div class="item d-flex align-items-center mt-3">
                                                                 <div class="counter">
-                                                                    <input type="text" name="count" class="counter"
-                                                                           value="1">
+                                                                    <span class="input-group-btn input-group-prepend">
+                                                                        <button type="button" data-id="{{$cartItem->id}}" onclick="decrement(this)" class="btn-counter waves-effect waves-light bootstrap-touchspin-down cart-number" type="button">-</button>
+                                                                    </span>
+                                                                    <input type="number" name="number[{{$cartItem->id}}]" class="counter rounded py-2 text-center number" style="width: 3rem;"
+                                                                    data-discount-price ="{{$cartItem->cartItemProductDiscount()}}" data-product-price = "{{$cartItem->cartItemProductPrice()}}"
+                                                                           step="1" value="{{$cartItem->number}}" readonly="readonly" id="{{$cartItem->id}}" min="1" max="5">
+                                                                           <span class="input-group-btn input-group-append">
+                                                                            <button type="button" data-id="{{$cartItem->id}}" onclick="increment(this)" class="btn-counter waves-effect waves-light bootstrap-touchspin-up cart-number" type="button">+</button>
+                                                                           </span>
                                                                 </div>
                                                                 <div class="remove danger-label ms-3">
-                                                                    <a href="" class="">
+                                                                    <a href="{{route('customer.sales-process.remove-from-cart' , $cartItem->id)}}" class="">
                                                                         <i class="bi bi-trash-fill"></i>
                                                                     </a>
                                                                 </div>
@@ -134,12 +143,12 @@
                                                             </div>
                                                         </div>
 
-                                                        <div class="mt-2">
+                                                        {{-- <div class="mt-2">
                                                             <a href=""
                                                                class="btn btn-sm main-color-one-outline  rounded-pill"><i
                                                                     class="bi bi-plus-circle me-1"></i> ذخیره در لیست
                                                                 خرید بعدی</a>
-                                                        </div>
+                                                        </div> --}}
 
                                                     </div>
                                                 </div>
@@ -161,12 +170,12 @@
                             <div class="factor">
                                 <div class="d-flex factor-item mb-3 align-items-center justify-content-between">
                                     <h5 class="title-font mb-0 h6">قیمت کالا ها</h5>
-                                    <p class="mb-0 font-17">{{priceFormat($totalProductPrice)}} ریال</p>
+                                    <p class="mb-0 font-17" id="total_product_price">{{priceFormat($totalProductPrice)}} ریال</p>
                                 </div>
 
                                 <div class="d-flex factor-item mb-3 align-items-center justify-content-between">
                                     <h5 class="title-font mb-0 h6">تخفیف کالا ها</h5>
-                                    <p class="mb-0 font-18">{{priceFormat($totalDiscountPrice)}} ریال</p>
+                                    <p class="mb-0 font-18" id="total_discount_price">{{priceFormat($totalDiscountPrice)}} ریال</p>
                                 </div>
 
                                 <div class="d-flex factor-item flex-column mb-3 align-items-start justify-content-between">
@@ -191,7 +200,7 @@
 
                                 <div class="d-flex factor-item mb-3 align-items-center justify-content-between">
                                     <h5 class="title-font mb-0 h6">مجموع</h5>
-                                    <p class="mb-0 font-18">{{ priceFormat($totalProductPrice - $totalDiscountPrice) }} ریال</p>
+                                    <p class="mb-0 font-18" id="total_price">{{ priceFormat($totalProductPrice - $totalDiscountPrice) }} ریال</p>
                                 </div>
 
                                 <div class="action mt-3 d-flex align-items-center justify-content-center">
@@ -295,3 +304,67 @@
     </div>
 </div>
 @endsection
+
+@section('script')
+<script>
+    $(document).ready(function() {
+        bill();
+
+        $('.cart-number').click(function() {
+            bill();
+        });
+
+
+        function bill() {
+            var total_product_price = 0;
+            var total_discount_price = 0;
+            var total_price = 0;
+
+            $('.number').each(function() {
+                var productPrice = parseFloat($(this).data('product-price'));
+                var discountPrice = parseFloat($(this).data('discount-price'));
+                var number = parseFloat($(this).val());
+
+                total_product_price += number * productPrice;
+                total_discount_price += number * discountPrice;
+            });
+
+            total_price = total_product_price - total_discount_price;
+
+            $('#total_product_price').html(toFarsiNumber(total_product_price));
+            $('#total_discount_price').html(toFarsiNumber(total_discount_price));
+            $('#total_price').html(toFarsiNumber(total_price));
+
+            function toFarsiNumber(number) {
+                const farsiDigits = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
+
+                //add comma
+                number = new Intl.NumberFormat().format(number);
+                //convert to persian
+                return number.toString().replace(/\d/g, x => farsiDigits[x]);
+
+            }
+
+        }
+    });
+</script>
+
+
+<script>
+    function increment(button) {
+        const inputId = button.getAttribute('data-id');
+        const input = document.getElementById(inputId);
+        if (parseInt(input.value) < 5) {
+            input.value = parseInt(input.value) + 1;
+        }
+    }
+
+    function decrement(button) {
+        const inputId = button.getAttribute('data-id');
+        const input = document.getElementById(inputId);
+        if (input.value > 1) {
+            input.value = parseInt(input.value) - 1;
+        }
+    }
+</script>
+    @endsection
