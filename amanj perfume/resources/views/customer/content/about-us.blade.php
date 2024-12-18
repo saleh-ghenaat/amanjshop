@@ -128,7 +128,7 @@
 
 <!--start cart canvas-->
 
-@include('customer.layouts.cartbar')
+@include('customer.layouts.cart-canvas')
 
 <!--end cart canvas-->
 

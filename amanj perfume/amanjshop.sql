@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 11, 2024 at 04:12 PM
+-- Generation Time: Dec 18, 2024 at 06:08 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -139,26 +139,21 @@ CREATE TABLE `cart_items` (
 --
 
 INSERT INTO `cart_items` (`id`, `user_id`, `product_id`, `color_id`, `guarantee_id`, `number`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(5, 1, 2, NULL, NULL, 3, '2024-12-02 08:57:10', '2024-12-04 18:24:14', '2024-12-04 18:24:14'),
-(6, 1, 3, NULL, NULL, 2, '2024-12-02 09:06:34', '2024-12-04 18:24:23', '2024-12-04 18:24:23'),
-(7, 1, 3, NULL, NULL, 1, '2024-12-04 19:17:56', '2024-12-04 19:23:25', '2024-12-04 19:23:25'),
-(8, 1, 3, NULL, NULL, 4, '2024-12-04 19:26:16', '2024-12-04 19:27:09', '2024-12-04 19:27:09'),
-(9, 1, 3, NULL, NULL, 3, '2024-12-04 19:27:30', '2024-12-04 19:29:25', '2024-12-04 19:29:25'),
-(10, 1, 2, NULL, NULL, 4, '2024-12-04 19:27:40', '2024-12-04 19:29:32', '2024-12-04 19:29:32'),
-(11, 1, 3, NULL, NULL, 2, '2024-12-04 19:35:06', '2024-12-04 19:35:23', '2024-12-04 19:35:23'),
-(12, 1, 3, NULL, NULL, 1, '2024-12-04 19:43:18', '2024-12-04 19:48:40', '2024-12-04 19:48:40'),
-(13, 1, 2, NULL, NULL, 1, '2024-12-04 19:48:33', '2024-12-04 19:48:44', '2024-12-04 19:48:44'),
-(14, 1, 2, NULL, NULL, 1, '2024-12-04 19:48:49', '2024-12-04 19:53:06', '2024-12-04 19:53:06'),
-(15, 1, 3, NULL, NULL, 2, '2024-12-04 19:49:02', '2024-12-04 19:53:06', '2024-12-04 19:53:06'),
-(16, 1, 3, NULL, NULL, 3, '2024-12-04 19:53:19', '2024-12-04 20:03:07', '2024-12-04 20:03:07'),
-(17, 1, 2, NULL, NULL, 4, '2024-12-04 20:06:31', '2024-12-04 20:10:56', '2024-12-04 20:10:56'),
-(18, 1, 3, NULL, NULL, 1, '2024-12-04 20:06:46', '2024-12-04 20:11:00', '2024-12-04 20:11:00'),
-(19, 1, 2, NULL, NULL, 2, '2024-12-04 20:11:09', '2024-12-06 14:50:41', '2024-12-06 14:50:41'),
-(20, 1, 3, NULL, NULL, 1, '2024-12-04 20:11:19', '2024-12-06 14:51:58', '2024-12-06 14:51:58'),
-(21, 1, 3, NULL, NULL, 1, '2024-12-06 14:52:32', '2024-12-07 15:42:40', '2024-12-07 15:42:40'),
-(22, 1, 2, NULL, NULL, 2, '2024-12-07 15:42:28', '2024-12-09 12:24:01', NULL),
-(23, 1, 3, NULL, NULL, 3, '2024-12-09 12:24:42', '2024-12-09 12:45:33', '2024-12-09 12:45:33'),
-(24, 1, 3, NULL, NULL, 2, '2024-12-09 12:58:28', '2024-12-09 12:58:33', NULL);
+(27, 1, 3, NULL, 4, 3, '2024-12-14 17:12:40', '2024-12-16 13:12:21', '2024-12-16 13:12:21'),
+(28, 1, 2, NULL, 2, 5, '2024-12-16 12:26:39', '2024-12-16 13:12:24', '2024-12-16 13:12:24'),
+(29, 1, 2, NULL, 1, 1, '2024-12-16 13:13:00', '2024-12-16 13:56:44', '2024-12-16 13:56:44'),
+(30, 1, 3, NULL, 3, 2, '2024-12-16 13:13:24', '2024-12-16 14:04:58', '2024-12-16 14:04:58'),
+(31, 1, 2, NULL, 1, 3, '2024-12-16 13:56:16', '2024-12-18 15:53:43', '2024-12-18 15:53:43'),
+(32, 1, 3, NULL, NULL, 4, '2024-12-16 14:03:13', '2024-12-16 14:04:53', '2024-12-16 14:04:53'),
+(33, 1, 2, NULL, NULL, 3, '2024-12-18 15:54:00', '2024-12-18 15:54:25', '2024-12-18 15:54:25'),
+(34, 1, 3, NULL, NULL, 4, '2024-12-18 15:54:34', '2024-12-18 15:55:11', '2024-12-18 15:55:11'),
+(35, 1, 3, NULL, 3, 1, '2024-12-18 15:55:18', '2024-12-18 16:14:37', '2024-12-18 16:14:37'),
+(36, 1, 2, NULL, 1, 1, '2024-12-18 15:55:27', '2024-12-18 16:12:57', '2024-12-18 16:12:57'),
+(37, 1, 2, NULL, NULL, 2, '2024-12-18 16:12:46', '2024-12-18 16:14:41', '2024-12-18 16:14:41'),
+(38, 1, 2, NULL, 2, 2, '2024-12-18 16:14:48', '2024-12-18 16:51:36', '2024-12-18 16:51:36'),
+(39, 1, 3, NULL, 3, 1, '2024-12-18 16:15:02', '2024-12-18 16:51:39', '2024-12-18 16:51:39'),
+(40, 1, 2, NULL, 1, 2, '2024-12-18 16:51:54', '2024-12-18 17:05:27', NULL),
+(41, 1, 3, NULL, 3, 1, '2024-12-18 16:52:14', '2024-12-18 17:05:27', NULL);
 
 -- --------------------------------------------------------
 
@@ -340,6 +335,14 @@ CREATE TABLE `delivery` (
   `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `delivery`
+--
+
+INSERT INTO `delivery` (`id`, `name`, `amount`, `delivery_time`, `delivery_time_unit`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 'پیک موتوری اختصاصی', 800000.000, 5, 'ساعت', 1, NULL, NULL, NULL),
+(2, 'پیک عمومی شاهان', 500000.000, 3, 'روز کاری', 1, NULL, NULL, NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -397,7 +400,9 @@ CREATE TABLE `guarantees` (
 
 INSERT INTO `guarantees` (`id`, `name`, `product_id`, `price_increase`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (1, 'پارس', 2, 20000.000, 1, '2024-12-07 15:50:33', '2024-12-07 15:50:33', NULL),
-(2, 'پدیده', 2, 30000.000, 1, '2024-12-07 15:50:50', '2024-12-07 15:50:50', NULL);
+(2, 'پدیده', 2, 30000.000, 1, '2024-12-07 15:50:50', '2024-12-07 15:50:50', NULL),
+(3, 'لاکی', 3, 500000.000, 1, '2024-12-15 15:53:14', '2024-12-15 15:53:14', NULL),
+(4, 'جانسو', 3, 600000.000, 1, '2024-12-15 15:53:27', '2024-12-15 15:53:27', NULL);
 
 -- --------------------------------------------------------
 
@@ -575,6 +580,7 @@ CREATE TABLE `orders` (
   `common_discount_id` bigint(20) UNSIGNED DEFAULT NULL,
   `common_discount_object` longtext DEFAULT NULL,
   `order_common_discount_amount` decimal(20,3) DEFAULT NULL,
+  `order_total_products_amount` decimal(20,3) DEFAULT NULL,
   `order_total_products_discount_amount` decimal(20,3) DEFAULT NULL,
   `order_status` tinyint(4) NOT NULL DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -1041,7 +1047,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('ygivJoik36KAkRxbjjur0rjhmowQnI9jHEDS0Jmy', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36', 'YTo1OntzOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxO3M6NjoiX3Rva2VuIjtzOjQwOiI2bGNaMnNEdTV3OFhNcFV5aVlZRmtiWkZYZHVKVElYRzRCWWRwamU2IjtzOjE3OiJwYXNzd29yZF9oYXNoX3dlYiI7czo4OiI5ODM1NTE1NCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjY6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMC9jYXJ0Ijt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1733749903);
+('M8QVOBLLfOuHYOwcgGWqWuWU6poeKqGyuRBJHjvY', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36', 'YTo1OntzOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxO3M6NjoiX3Rva2VuIjtzOjQwOiJEb084OXlsR0NqNEtvNmlKQkNjUUtvTENHZ0NjampaVFRZZ0pVenNwIjtzOjE3OiJwYXNzd29yZF9oYXNoX3dlYiI7czo4OiI5ODM1NTE1NCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mjk6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMC9wYXltZW50Ijt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1734541527);
 
 -- --------------------------------------------------------
 
@@ -1181,7 +1187,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `email`, `mobile`, `password`, `two_factor_secret`, `two_factor_recovery_codes`, `national_code`, `first_name`, `last_name`, `slug`, `profile_photo_path`, `email_verified_at`, `mobile_verified_at`, `activation`, `activation_date`, `user_type`, `status`, `current_team_id`, `remember_token`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, NULL, '9129230286', '98355154', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, 0, 0, NULL, NULL, '2024-11-17 13:47:53', '2024-11-17 13:47:53', NULL);
+(1, 'ali@gmail.com', '9129230286', '98355154', NULL, NULL, '0110056371', 'علی', 'نوروزی', NULL, NULL, NULL, NULL, 1, NULL, 0, 0, NULL, NULL, '2024-11-17 13:47:53', '2024-12-14 20:12:09', NULL);
 
 --
 -- Indexes for dumped tables
@@ -1626,7 +1632,7 @@ ALTER TABLE `brands`
 -- AUTO_INCREMENT for table `cart_items`
 --
 ALTER TABLE `cart_items`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT for table `cart_item_selected_attributes`
@@ -1686,7 +1692,7 @@ ALTER TABLE `copans`
 -- AUTO_INCREMENT for table `delivery`
 --
 ALTER TABLE `delivery`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -1704,7 +1710,7 @@ ALTER TABLE `faqs`
 -- AUTO_INCREMENT for table `guarantees`
 --
 ALTER TABLE `guarantees`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `menus`
@@ -1734,7 +1740,7 @@ ALTER TABLE `online_payments`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `order_items`

@@ -50,15 +50,15 @@ class ProfileCompletionController extends Controller
                 $errorText = 'فرمت شماره موبایل معتبر نیست';
                 return redirect()->back()->withErrors(['mobile', $errorText]);
             }
-            
+
         }
             if(isset($request->email) && empty($user->email))
             {
-                $email = convertArabicToEnglish($request->mobile);
+                $email = convertArabicToEnglish($request->email);
                 $email = convertPersianToEnglish($email);
-                
+
                 $inputs['email'] = $email;
-                
+
             }
 
             $inputs = array_filter($inputs);
@@ -67,7 +67,7 @@ class ProfileCompletionController extends Controller
             {
                 $user->update($inputs);
             }
-            return redirect()->route('customer.sales-process.address-and-delivery');
+            return redirect()->route('customer.sales-process.payment');
 
 
     }

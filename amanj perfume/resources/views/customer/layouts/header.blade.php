@@ -29,7 +29,9 @@
                            class="btn main-color-one-bg">
                             <i class="bi bi-basket-fill"></i>
                             <span>سبد خرید</span>
+                            @if($cartItems->count() > 0)
                             <span id="cartCounter" class="cart-counter">{{$cartItems->count()}}</span>
+                            @endif
                         </a>
                     </div>
                     @auth

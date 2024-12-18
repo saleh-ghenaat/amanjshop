@@ -469,21 +469,21 @@ Route::namespace ('SalesProcess')->group(function () {
 
     //cart
     Route::get('/cart', [CartController::class, 'cart'])->name('customer.sales-process.cart');
-    Route::post('/cart', [CartController::class, 'updateCart'])->name('customer.sales-process.update-cart');
+    Route::post('update-cart', [CartController::class, 'updateCart'])->name('customer.sales-process.update-cart');
     Route::post('/add-to-cart/{product:slug}', [CartController::class, 'addToCart'])->name('customer.sales-process.add-to-cart');
     Route::get('/remove-from-cart/{cartItem}', [CartController::class, 'removeFromCart'])->name('customer.sales-process.remove-from-cart');
 
     //profile completion
     Route::get('/profile-completion', [ProfileCompletionController::class, 'profileCompletion'])->name('customer.sales-process.profile-completion');
-    Route::post('/profile-completion', [ProfileCompletionController::class, 'update'])->name('customer.sales-process.profile-completion-update');
+    Route::post('/profile-completion/update', [ProfileCompletionController::class, 'update'])->name('customer.sales-process.profile-completion-update');
 
-    // Route::middleware('profile.completion')->group(function () {
-    //     //address
-    //     Route::get('/address-and-delivery', [AddressController::class, 'addressAndDelivery'])->name('customer.sales-process.address-and-delivery');
-    //     Route::post('/add-address', [AddressController::class, 'addAddress'])->name('customer.sales-process.add-address');
-    //     Route::put('/update-address/{address}', [AddressController::class, 'updateAddress'])->name('customer.sales-process.update-address');
-    //     Route::get('/get-cities/{province}', [AddressController::class, 'getCities'])->name('customer.sales-process.get-cities');
-    //     Route::post('/choose-address-and-delivery', [AddressController::class, 'chooseAddressAndDelivery'])->name('customer.sales-process.choose-address-and-delivery');
+    Route::middleware('profile.completion')->group(function () {
+        //address
+        Route::get('/address-and-delivery', [AddressController::class, 'addressAndDelivery'])->name('customer.sales-process.address-and-delivery');
+        Route::post('/add-address', [AddressController::class, 'addAddress'])->name('customer.sales-process.add-address');
+        Route::put('/update-address/{address}', [AddressController::class, 'updateAddress'])->name('customer.sales-process.update-address');
+        Route::get('/get-cities/{province}', [AddressController::class, 'getCities'])->name('customer.sales-process.get-cities');
+        Route::post('/choose-address-and-delivery', [AddressController::class, 'chooseAddressAndDelivery'])->name('customer.sales-process.choose-address-and-delivery');
 
         //payment
         Route::get('/payment', [CustomerPaymentController::class, 'payment'])->name('customer.sales-process.payment');
@@ -492,7 +492,7 @@ Route::namespace ('SalesProcess')->group(function () {
 
     });
 
-
+});
 
 Route::namespace ('Market')->group(function () {
 

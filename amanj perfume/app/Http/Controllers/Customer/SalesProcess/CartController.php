@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers\Customer\SalesProcess;
 
+use App\Models\Market\Order;
 use Illuminate\Http\Request;
 use App\Models\Market\Product;
 use App\Models\Market\CartItem;
+use App\Models\Market\Delivery;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Market\CommonDiscount;
 use Illuminate\Validation\Rules\Exists;
 
 class CartController extends Controller
@@ -16,8 +19,9 @@ class CartController extends Controller
         if(Auth::check())
         {
             $cartItems = CartItem::where('user_id', Auth::user()->id)->get();
+            $delivery_methods = Delivery::all();
             // $relatedProducts = Product::all();
-            return view('customer.sales-process.cart', compact('cartItems'));
+            return view('customer.sales-process.cart', compact('cartItems' , 'delivery_methods'));
         }
         else{
             return redirect()->route('auth.customer.login-register-form');
@@ -26,19 +30,71 @@ class CartController extends Controller
 
     public function updateCart(Request $request)
     {
+
+
+        $user = auth()->user();
         $inputs = $request->all();
-        $cartItems = CartItem::where('user_id', Auth::user()->id)->get();
+        $cartItems = CartItem::where('user_id', $user->id)->get();
         foreach($cartItems as $cartItem){
-            if(isset($inputs['number'][$cartItem->id]))
-            {
-                $cartItem->update(['number' => $inputs['number'][$cartItem->id]]);
-            }
-            // else{
-            //     $cartItem->update(['number' => $cartItem->number +1]);
-            // }
+                $cartItem->update(['number' => $inputs['number'][$cartItem->id] , 'guarantee_id' => $inputs['guarantee'][$cartItem->id]]);
+
         }
-        return redirect()->route('customer.sales-process.address-and-delivery');
+         //calc price
+        $totalProductPrice = 0;
+        $totalDiscount = 0;
+        $totalFinalPrice = 0;
+        $totalFinalDiscountPriceWithNumbers = 0;
+        foreach ($cartItems as $cartItem)
+        {
+            $totalProductPrice += $cartItem->cartItemProductPrice();
+            $totalDiscount += $cartItem->cartItemProductDiscount();
+            $totalFinalPrice += $cartItem->cartItemFinalPrice();
+            $totalFinalDiscountPriceWithNumbers += $cartItem->cartItemFinalDiscount();
+        }
+
+        //commonDiscount
+        $commonDiscount = CommonDiscount::where([['status', 1], ['end_date', '>', now()], ['start_date', '<', now()]])->first();
+        if($commonDiscount)
+        {
+             $commonPercentageDiscountAmount = $totalFinalPrice * ($commonDiscount->percentage / 100);
+             if($commonPercentageDiscountAmount > $commonDiscount->discount_ceiling)
+             {
+                $commonPercentageDiscountAmount = $commonDiscount->discount_ceiling;
+             }
+             if($commonDiscount != null and $totalFinalPrice >= $commonDiscount->minimal_order_amount)
+             {
+                $finalPrice = $totalFinalPrice - $commonPercentageDiscountAmount;
+             }
+             else{
+                $finalPrice = $totalFinalPrice;
+             }
+        }
+        else{
+            $commonPercentageDiscountAmount = null;
+            $finalPrice = $totalFinalPrice;
+        }
+
+        $delivery = Delivery::find($request->delivery_id);
+        $inputs['delivery_amount'] = $delivery->amount;
+        $inputs['user_id'] = $user->id;
+        $inputs['order_final_amount'] = $finalPrice + $delivery->amount;
+        $inputs['order_discount_amount'] = $totalFinalDiscountPriceWithNumbers;
+        $inputs['order_common_discount_amount'] = $commonPercentageDiscountAmount;
+        $inputs['order_total_products_amount'] = $totalProductPrice;
+        $inputs['order_total_products_discount_amount'] = $inputs['order_discount_amount'] + $inputs['order_common_discount_amount'];
+
+
+        $order = Order::updateOrCreate(
+            ['user_id' => $user->id, 'order_status' => 0],
+            $inputs
+        );
+
+        return redirect()->route('customer.sales-process.payment');
     }
+
+
+
+
 
 
     public function addToCart(Product $product, Request $request)

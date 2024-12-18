@@ -880,8 +880,9 @@
                                 <div class="product-box-title">
                                     <h5 class="text-overflow-2">{{$product->name}}</h5>
                                 </div>
-                                <div class="product-box-price">
+                                @if($amazingSales)
 
+                                <div class="product-box-price">
                                     <div class="product-box-price-discount">
 
                                         <span class="d-block badge main-color-one-bg text-white font-14 rounded-pill">{{$amazingSales->percentage.'%'}}</span>
@@ -894,6 +895,18 @@
                                         <p class="mb-0 text-muted">ریال</p>
                                     </div>
                                 </div>
+                                @else
+
+                                <div class="product-box-price">
+                                    <div class="product-box-price-price">
+                                        <h5 class="title-font main-color-green-color h2 mb-0">{{ priceFormat($product->price) }}</h5>
+                                        <p class="mb-0 text-muted">ریال</p>
+                                    </div>
+                                </div>
+
+
+                                @endif
+
                                 <div class="product-box-hover">
                                     <nav class="navbar navbar-expand justify-content-center">
                                         <ul class="navbar-nav align-items-center">
@@ -1005,6 +1018,7 @@
                                 <h5 class="text-overflow-2">{{$product->name}}
                                 </h5>
                             </div>
+                            @if($amazingSales)
                             <div class="product-box-price">
                                 <div class="product-box-price-discount">
                                     <span class="d-block badge main-color-one-bg text-white font-14 rounded-pill">{{$amazingSales->percentage.'%'}}</span>
@@ -1015,6 +1029,15 @@
                                     <p class="mb-0 text-muted">ریال</p>
                                 </div>
                             </div>
+                            @else
+                            <div class="product-box-price">
+                            <div class="product-box-price-price">
+                                <h5 class="title-font main-color-green-color h2 mb-0">{{ priceFormat($product->price) }}</h5>
+                                <p class="mb-0 text-muted">ریال</p>
+                            </div>
+                        </div>
+
+                            @endif
                             <div class="product-box-hover">
                                 <nav class="navbar navbar-expand justify-content-center">
                                     <ul class="navbar-nav align-items-center">
@@ -1105,10 +1128,16 @@
                                     <h3 class="text-overflow-1 title-font font-14">{{$product->name}}
 
                                     </h3>
+                                    @if($amazingSales)
                                     <div class="cart-canvas-price my-3 d-flex align-items-center">
                                         <p class="mb-0 text-muted me-2 font-16 text-decoration-line-through">{{priceFormat($product->price)}}</p>
                                         <h6 class="title-font main-color-one-color">{{ priceFormat($product->price - $product->price * ($amazingSales->percentage / 100)) }} ریال</h6>
                                     </div>
+                                    @else
+                                    <div class="cart-canvas-price my-3 d-flex align-items-center">
+                                        <h6 class="title-font main-color-one-color">{{ priceFormat($product->price) }} ریال</h6>
+                                    </div>
+                                    @endif
                                     <div class="cart-canvas-foot d-flex align-items-center justify-content-end">
                                         <div class="cart-canvas-add">
                                             <form action="{{route('customer.sales-process.add-to-cart' , $product)}}" method="post" enctype="multipart/form-data">

@@ -24,12 +24,15 @@ class ProfileCompletionRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'first_name' => 'sometimes|required',
-            'last_name' => 'sometimes|required',
-            'email' => 'sometimes|email|unique:users,email',
-            'mobile' => 'sometimes|min:10|max:13|unique:users,mobile',
-            'national_code' => ['sometimes', 'required', 'unique:users,national_code', new NationalCode()],
-        ];
+
+            return [
+                'first_name' => 'sometimes|required',
+                'last_name' => 'sometimes|required',
+                'email' => 'sometimes|nullable|unique:users,email',
+                'mobile' => 'sometimes|min:10|max:13|unique:users,mobile',
+                'national_code' => ['sometimes', 'required', 'unique:users,national_code', new NationalCode()],
+            ];
+
+
     }
 }

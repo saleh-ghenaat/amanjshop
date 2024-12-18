@@ -12,8 +12,9 @@ class PaymentController extends Controller
 {
     public function payment()
     {
+        $order = Order::where('user_id', Auth::user()->id)->where('order_status', 0)->first();
 
-       return view('customer.sales-process.payment');
+       return view('customer.sales-process.payment' , compact('order'));
     }
 
     public function copanDiscount(Request $request)

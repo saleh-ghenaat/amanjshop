@@ -1,4 +1,4 @@
-@extends('customer.layouts.master-one-col')
+@extends('customer.layouts.master-simple')
 
 @section('head-tag')
 <title>صورتحساب</title>
@@ -200,12 +200,12 @@
 
                                             <div class="d-flex factor-item mb-3 align-items-center justify-content-between">
                                                 <h5 class="title-font mb-0 h6">قیمت کالا ها</h5>
-                                                <p class="mb-0 font-17">1,228,000 تومان</p>
+                                                <p class="mb-0 font-17">{{priceFormat($order->order_total_products_amount)}} ریال</p>
                                             </div>
 
                                             <div class="d-flex factor-item mb-3 align-items-center justify-content-between">
                                                 <h5 class="title-font mb-0 h6">تخفیف کالا ها</h5>
-                                                <p class="mb-0 font-18">1,296,000 تومان</p>
+                                                <p class="mb-0 font-18">{{priceFormat($order->order_discount_amount)}} ریال</p>
                                             </div>
 
                                             <div class="d-flex factor-item flex-column mb-3 align-items-start justify-content-between">
@@ -229,7 +229,7 @@
 
                                             <div class="d-flex factor-item mb-3 align-items-center justify-content-between">
                                                 <h5 class="title-font mb-0 h6">مجموع</h5>
-                                                <p class="mb-0 font-18">1,308,000 تومان</p>
+                                                <p class="mb-0 font-18">{{priceFormat($order->order_final_amount)}} ریال</p>
                                             </div>
                                         </div>
                                     </div>
@@ -288,12 +288,6 @@
 </div>
 
 <!-- end mobile menu -->
-
-<!--start cart canvas-->
-
-@include('customer.layouts.cartbar')
-
-<!--end cart canvas-->
 
 <div class="float-btn">
     <div class="container-fluid">

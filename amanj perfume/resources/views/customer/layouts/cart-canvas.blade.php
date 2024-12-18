@@ -29,10 +29,16 @@
                             <a href="">
                                 <h3 class="text-overflow-1 title-font font-14">{{ $cartItem->product->name }}
                                 </h3>
+                                @if($cartItem->cartItemProductDiscount())
                                 <div class="cart-canvas-price my-3 d-flex align-items-center">
                                     <p class="mb-0 text-muted me-2 font-16 text-decoration-line-through">{{ priceFormat($cartItem->cartItemProductPrice()) }}</p>
                                     <h6 class="title-font main-color-one-color">{{ priceFormat($cartItem->cartItemProductPrice() - $cartItem->cartItemProductDiscount()) }} ریال</h6>
                                 </div>
+                                @else
+                                <div class="cart-canvas-price my-3 d-flex align-items-center">
+                                    <h6 class="title-font main-color-one-color">{{ priceFormat($cartItem->cartItemProductPrice()) }} ریال</h6>
+                                </div>
+                                @endif
                             </a>
                             <div class="cart-canvas-foot d-flex align-items-center justify-content-between">
                                 <div class="cart-canvas-count">

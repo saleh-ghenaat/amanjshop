@@ -28,6 +28,11 @@
 
 <!-- end breadcroumb -->
 @if($cartItems->isNotEmpty())
+
+<form action="{{route('customer.sales-process.update-cart')}}" id="myForm" method="post" enctype="multipart/form-data">
+    @csrf
+    @method('post')
+
 <div class="content">
     <div class="container-fluid">
 
@@ -59,6 +64,7 @@
     @php
     $totalProductPrice = 0;
     $totalDiscountPrice = 0;
+    $total_price = 0;
 @endphp
     <div class="container-fluid">
         <div class="cart-product">
@@ -67,8 +73,8 @@
                     @foreach($cartItems as $cartItem)
                     @php
 
-                    $totalProductPrice += $cartItem->cartItemProductPrice() * $cartItem->number;
-                    $totalDiscountPrice += $cartItem->cartItemProductDiscount() * $cartItem->number;
+                    $totalProductPrice += $cartItem->cartItemProductPrice();
+                    $totalDiscountPrice += $cartItem->cartItemFinalDiscount();
                     $amazingSales = $cartItem->product->activeAmazingSales();
 
                 @endphp
@@ -98,10 +104,12 @@
                                                         <div class="cart-item-feature d-flex flex-column align-items-start flex-wrap mt-3">
                                                             @if($cartItem->product->guarantees->count() > 0)
                                                             <p><i class="bi bi-shield-check me-1"></i>
-                                                                <select name="form-select" class="rounded px-3" id="">
+                                                                <select name="guarantee[{{$cartItem->id}}]" class="rounded px-3 guarantee-selector" id="">
+                                                                    <option value="0">انتخاب گارانتی</option>
+
                                                                 @foreach($cartItem->product->guarantees as $guarantee)
 
-                                                                    <option value="{{$guarantee->id}}">{{$guarantee->name}}</option>
+                                                                    <option value="{{$guarantee->id}}" data-price-increase="{{$guarantee->price_increase}}">{{$guarantee->name}}</option>
                                                                 @endforeach
 
                                                                 </select>
@@ -133,12 +141,12 @@
                                                         <div class="product-box-price flex-column justify-content-end align-items-end">
                                                             <div class="product-box-price-discount mb-3">
                                                                 @if($cartItem->cartItemProductDiscount())
-                                                                <del>{{ priceFormat($cartItem->cartItemProductPrice()) }}</del>
+                                                                <del>{{ priceFormat($totalProductPrice) }}</del>
                                                                 @endif
                                                             </div>
                                                             <div class="product-box-price-price d-flex">
-                                                                <h5 class="title-font main-color-green-color h2 mb-2">
-                                                                    {{ priceFormat($cartItem->cartItemProductPrice() - $cartItem->cartItemProductDiscount()) }}</h5>
+                                                                <h5 class="title-font main-color-green-color h2 mb-2" id="single_product_price">
+                                                                    {{ priceFormat($cartItem->cartItemProductPrice() - $cartItem->cartItemProductDiscount())}}</h5>
                                                                 <p class="mb-0 text-muted-two ms-1 ">ریال</p>
                                                             </div>
                                                         </div>
@@ -180,34 +188,27 @@
 
                                 <div class="d-flex factor-item flex-column mb-3 align-items-start justify-content-between">
                                     <h5 class="title-font mb-0 h6">حمل و نقل</h5>
-                                    <form action="">
+                                        @foreach($delivery_methods as $delivery)
                                         <div class="form-check mt-3">
-                                            <input type="radio" checked class="form-check-input" name="post"
-                                                   id="post-1">
-                                            <label for="post-1" class="form-check-label">
-                                                پیک موتوری اختصاصی (کمتر از 5 ساعت): 80,000 تومان
+                                            <input type="radio" class="form-check-input delivery-amount"  data-delivery-price="{{$delivery->amount}}" name="delivery_id"
+                                                   id="d-{{$delivery->id}}" value="{{$delivery->id}}">
+                                            <label for="d-{{$delivery->id}}" class="form-check-label">
+                                                  {{$delivery->name}} ({{$delivery->delivery_time . ' ' . $delivery->delivery_time_unit}}): {{priceFormat($delivery->amount)}} ریال
                                             </label>
                                         </div>
-                                        <div class="form-check mt-3">
-                                            <input type="radio" class="form-check-input" name="post" id="post-2">
-                                            <label for="post-2" class="form-check-label">
-                                                پیک عمومی شاهان (2 تا 3 روز کاری): 50,000 تومان
-
-                                            </label>
-                                        </div>
-                                    </form>
+                                       @endforeach
                                 </div>
 
                                 <div class="d-flex factor-item mb-3 align-items-center justify-content-between">
                                     <h5 class="title-font mb-0 h6">مجموع</h5>
-                                    <p class="mb-0 font-18" id="total_price">{{ priceFormat($totalProductPrice - $totalDiscountPrice) }} ریال</p>
+                                    <p class="mb-0 font-18" id="total_price">{{ priceFormat($total_price) }} ریال</p>
+                                </div>
+                                <div class="action mt-3 d-flex align-items-center justify-content-center">
+                                    <button type="submit"
+                                       class="btn main-color-one-outline py-2 rounded-pill rounded-3 d-block w-100">تسویه
+                                        حساب</button>
                                 </div>
 
-                                <div class="action mt-3 d-flex align-items-center justify-content-center">
-                                    <a href="{{route('customer.sales-process.payment')}}"
-                                       class="btn main-color-one-outline py-2 rounded-pill rounded-3 d-block w-100">تسویه
-                                        حساب</a>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -225,6 +226,7 @@
     </div>
 
 </div>
+</form>
 
 @else
 
@@ -314,22 +316,31 @@
             bill();
         });
 
+        $('.delivery-amount').click(function(){
+            bill();
+        });
+
+        $('.guarantee-selector').change(function(){
+            bill();
+        });
 
         function bill() {
             var total_product_price = 0;
             var total_discount_price = 0;
             var total_price = 0;
+            var delivery_amount = parseFloat($('input[name="delivery_id"]:checked').data('delivery-price')) || 0;
 
             $('.number').each(function() {
                 var productPrice = parseFloat($(this).data('product-price'));
                 var discountPrice = parseFloat($(this).data('discount-price'));
                 var number = parseFloat($(this).val());
+                var guaranteeIncrease = parseFloat($(this).closest('.cart-item-feature').find('.guarantee-selector option:selected').data('price-increase')) || 0;
 
-                total_product_price += number * productPrice;
-                total_discount_price += number * discountPrice;
+                total_product_price += number * (productPrice + guaranteeIncrease);
+                total_discount_price += number * (discountPrice + guaranteeIncrease);
             });
 
-            total_price = total_product_price - total_discount_price;
+            total_price = total_product_price - total_discount_price + delivery_amount;
 
             $('#total_product_price').html(toFarsiNumber(total_product_price));
             $('#total_discount_price').html(toFarsiNumber(total_discount_price));

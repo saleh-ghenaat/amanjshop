@@ -41,5 +41,11 @@ class AppServiceProvider extends ServiceProvider
                 $view->with('cartItems', $cartItems);
             }
         });
+        view()->composer('customer.layouts.cart-canvas', function ($view) {
+            if (Auth::check()) {
+                $cartItems = CartItem::where('user_id', Auth::user()->id)->get();
+                $view->with('cartItems', $cartItems);
+            }
+        });
     }
 }
