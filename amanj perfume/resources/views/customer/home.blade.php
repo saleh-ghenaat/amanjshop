@@ -910,7 +910,7 @@
                                 <div class="product-box-hover">
                                     <nav class="navbar navbar-expand justify-content-center">
                                         <ul class="navbar-nav align-items-center">
-                                            <li class="nav-item"><a href=""
+                                            <li class="nav-item"><a href="{{ route('customer.market.product', $product) }}"
                                                     class="nav-item product-box-hover-item me-3">مشاهده
                                                     محصول</a></li>
                                             <li class="nav-item">
