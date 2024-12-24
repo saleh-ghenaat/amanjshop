@@ -130,12 +130,13 @@
                                 <div class="col-lg-8">
                                     <div class="product-meta-feature-items">
                                         <h5 class="title font-16 mb-2">ویژگی های کالا</h5>
+                                        @foreach ($product->metas()->get() as $meta)
                                         <ul class="navbar-nav">
-                                            <li class="nav item"><span>نوع اتصال:</span><strong>با سیم</strong></li>
-                                            <li class="nav item"><span>رابط ها:</span><strong>3.5 میلیمتری</strong></li>
-                                            <li class="nav item"><span>مقدار رم :</span><strong>8 گیگابایت</strong></li>
-                                            <li class="nav item"><span>نوع گوشی:</span><strong>دوگوشی</strong></li>
+                                            <li class="nav item"><span> {{ $meta->meta_key }}:</span><strong>{{ $meta->meta_value }} </strong></li>
+                                            
                                         </ul>
+                                        @endforeach
+
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
@@ -157,7 +158,9 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="product-meta-color bottom-border my-4">
+                        <!-- start  product color-->
+
+                        <!-- <div class="product-meta-color bottom-border my-4">
                             <h5 class="font-16">
                                 انتخاب رنگ کالا
                             </h5>
@@ -188,7 +191,10 @@
                                     آبی
                                 </label>
                             </div>
-                        </div>
+                        </div> -->
+
+                         <!-- end  product color-->
+
                         <div class="product-meta-action mt-4 bottom-border">
                             <div class="row align-items-center gy-3">
                                 <div class="col-sm-6">
@@ -222,7 +228,7 @@
 
 <!-- start multi seller -->
 
-<div class="multi-seller py-20">
+<!-- <div class="multi-seller py-20">
     <div class="container-fluid">
         <div class="content-box">
             <div class="container-fluid">
@@ -375,7 +381,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
 
 <!-- end multi seller -->
 
