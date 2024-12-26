@@ -68,7 +68,7 @@
                                     <div class="swiper-wrapper" title="برای بزرگنمایی تصویر دابل کلیک کنید">
                                         @foreach ($images as $key => $image)
                                         <div class="swiper-slide">
-                                        <div class="swiper-zoom-container">
+                                            <div class="swiper-zoom-container">
                                                 <img class="img-fluid" src="{{ asset($images->first()['indexArray']['small']) }}" />
                                             </div>
                                         </div>
@@ -79,7 +79,7 @@
                                     <div class="swiper-pagination d-none d-lg-block"></div>
                                 </div>
                             </div>
-                           
+
                             <div thumbsSlider="" class="swiper product-gallery-thumb">
                                 <div class="swiper-wrapper">
                                     @foreach ($images as $key => $image)
@@ -133,7 +133,7 @@
                                         @foreach ($product->metas()->get() as $meta)
                                         <ul class="navbar-nav">
                                             <li class="nav item"><span> {{ $meta->meta_key }}:</span><strong>{{ $meta->meta_value }} </strong></li>
-                                            
+
                                         </ul>
                                         @endforeach
 
@@ -193,7 +193,7 @@
                             </div>
                         </div> -->
 
-                         <!-- end  product color-->
+                        <!-- end  product color-->
 
                         <div class="product-meta-action mt-4 bottom-border">
                             <div class="row align-items-center gy-3">
@@ -1320,6 +1320,11 @@
             <div class="swiper" id="product-slider">
 
                 <div class="swiper-wrapper ">
+                    @forelse($relatedProducts as $relatedProduct)
+                    
+                    @php
+                    $amazingSales = $product->activeAmazingSales();
+                    @endphp
 
                     <div class="swiper-slide">
                         <div class="product-box">
@@ -1328,17 +1333,15 @@
                                     <img src="assets/img/product/television1.jpg" alt="">
                                 </div>
                                 <div class="product-box-title">
-                                    <h5 class="text-overflow-2">ساعت هوشمند شیائومی مدل Redmi Watch 2 Lite طرح بند
-                                        سلیکونی
-                                    </h5>
+                                    <h5 class="text-overflow-2"> {{ $relatedProduct->name }} </h5>
                                 </div>
                                 <div class="product-box-price">
                                     <div class="product-box-price-discount">
-                                        <span class="d-block badge main-color-one-bg text-white font-14 rounded-pill">25%</span>
-                                        <del>2,500,000</del>
+                                        <span class="d-block badge main-color-one-bg text-white font-14 rounded-pill">{{$amazingSales->percentage.'%'}}</span>
+                                        <del>{{ priceFormat($relatedProduct->price) }}</del>
                                     </div>
                                     <div class="product-box-price-price">
-                                        <h5 class="title-font main-color-green-color h2 mb-0">799,000</h5>
+                                        <h5 class="title-font main-color-green-color h2 mb-0">{{ priceFormat($product->price - $product->price * ($amazingSales->percentage / 100)) }}</h5>
                                         <p class="mb-0 text-muted">تومان</p>
                                     </div>
                                 </div>
@@ -1364,350 +1367,11 @@
                             </a>
                         </div>
                     </div>
-                    <div class="swiper-slide">
-                        <div class="product-box">
-                            <a href="">
-                                <div class="product-box-image">
-                                    <img src="assets/img/product/wach2.jpg" alt="">
-                                </div>
-                                <div class="product-box-title">
-                                    <h5 class="text-overflow-2">ساعت هوشمند شیائومی مدل Redmi Watch 2 Lite طرح بند
-                                        سلیکونی
-                                    </h5>
-                                </div>
-                                <div class="product-box-price">
-                                    <div class="product-box-price-discount">
-                                        <span class="d-block badge main-color-one-bg text-white font-14 rounded-pill">25%</span>
-                                        <del>2,500,000</del>
-                                    </div>
-                                    <div class="product-box-price-price">
-                                        <h5 class="title-font main-color-green-color h2 mb-0">799,000</h5>
-                                        <p class="mb-0 text-muted">تومان</p>
-                                    </div>
-                                </div>
-                                <div class="product-box-hover">
-                                    <nav class="navbar navbar-expand justify-content-center">
-                                        <ul class="navbar-nav align-items-center">
-                                            <li class="nav-item"><a href=""
-                                                    class="nav-item product-box-hover-item me-3">مشاهده
-                                                    محصول</a></li>
-                                            <li class="nav-item"><a href=""
-                                                    class="nav-item product-box-hover-item product-box-hover-item-btn me-1"
-                                                    data-bs-toggle="tooltip" data-bs-placement="top"
-                                                    data-bs-title="افزودن به سبد خرید"><i
-                                                        class="bi bi-basket"></i></a></li>
-                                            <li class="nav-item"><a href=""
-                                                    class="nav-item product-box-hover-item product-box-hover-item-btn"
-                                                    data-bs-toggle="tooltip" data-bs-placement="top"
-                                                    data-bs-title="افزودن به علاقه ها"><i
-                                                        class="bi bi-heart"></i></a></li>
-                                        </ul>
-                                    </nav>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="product-box">
-                            <a href="">
-                                <div class="product-box-image">
-                                    <img src="assets/img/product/wach3.jpg" alt="">
-                                </div>
-                                <div class="product-box-title">
-                                    <h5 class="text-overflow-2">ساعت هوشمند شیائومی مدل Redmi Watch 2 Lite طرح بند
-                                        سلیکونی
-                                    </h5>
-                                </div>
-                                <div class="product-box-price">
-                                    <div class="product-box-price-discount">
-                                        <span class="d-block badge main-color-one-bg text-white font-14 rounded-pill">25%</span>
-                                        <del>2,500,000</del>
-                                    </div>
-                                    <div class="product-box-price-price">
-                                        <h5 class="title-font main-color-green-color h2 mb-0">799,000</h5>
-                                        <p class="mb-0 text-muted">تومان</p>
-                                    </div>
-                                </div>
-                                <div class="product-box-hover">
-                                    <nav class="navbar navbar-expand justify-content-center">
-                                        <ul class="navbar-nav align-items-center">
-                                            <li class="nav-item"><a href=""
-                                                    class="nav-item product-box-hover-item me-3">مشاهده
-                                                    محصول</a></li>
-                                            <li class="nav-item"><a href=""
-                                                    class="nav-item product-box-hover-item product-box-hover-item-btn me-1"
-                                                    data-bs-toggle="tooltip" data-bs-placement="top"
-                                                    data-bs-title="افزودن به سبد خرید"><i
-                                                        class="bi bi-basket"></i></a></li>
-                                            <li class="nav-item"><a href=""
-                                                    class="nav-item product-box-hover-item product-box-hover-item-btn"
-                                                    data-bs-toggle="tooltip" data-bs-placement="top"
-                                                    data-bs-title="افزودن به علاقه ها"><i
-                                                        class="bi bi-heart"></i></a></li>
-                                        </ul>
-                                    </nav>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="product-box">
-                            <a href="">
-                                <div class="product-box-image">
-                                    <img src="assets/img/product/wach4.jpg" alt="">
-                                </div>
-                                <div class="product-box-title">
-                                    <h5 class="text-overflow-2">ساعت هوشمند شیائومی مدل Redmi Watch 2 Lite طرح بند
-                                        سلیکونی
-                                    </h5>
-                                </div>
-                                <div class="product-box-price">
-                                    <div class="product-box-price-discount">
-                                        <span class="d-block badge main-color-one-bg text-white font-14 rounded-pill">25%</span>
-                                        <del>2,500,000</del>
-                                    </div>
-                                    <div class="product-box-price-price">
-                                        <h5 class="title-font main-color-green-color h2 mb-0">799,000</h5>
-                                        <p class="mb-0 text-muted">تومان</p>
-                                    </div>
-                                </div>
-                                <div class="product-box-hover">
-                                    <nav class="navbar navbar-expand justify-content-center">
-                                        <ul class="navbar-nav align-items-center">
-                                            <li class="nav-item"><a href=""
-                                                    class="nav-item product-box-hover-item me-3">مشاهده
-                                                    محصول</a></li>
-                                            <li class="nav-item"><a href=""
-                                                    class="nav-item product-box-hover-item product-box-hover-item-btn me-1"
-                                                    data-bs-toggle="tooltip" data-bs-placement="top"
-                                                    data-bs-title="افزودن به سبد خرید"><i
-                                                        class="bi bi-basket"></i></a></li>
-                                            <li class="nav-item"><a href=""
-                                                    class="nav-item product-box-hover-item product-box-hover-item-btn"
-                                                    data-bs-toggle="tooltip" data-bs-placement="top"
-                                                    data-bs-title="افزودن به علاقه ها"><i
-                                                        class="bi bi-heart"></i></a></li>
-                                        </ul>
-                                    </nav>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="product-box">
-                            <a href="">
-                                <div class="product-box-image">
-                                    <img src="assets/img/product/television4.jpg" alt="">
-                                </div>
-                                <div class="product-box-title">
-                                    <h5 class="text-overflow-2">ساعت هوشمند شیائومی مدل Redmi Watch 2 Lite طرح بند
-                                        سلیکونی
-                                    </h5>
-                                </div>
-                                <div class="product-box-price">
-                                    <div class="product-box-price-discount">
-                                        <span class="d-block badge main-color-one-bg text-white font-14 rounded-pill">25%</span>
-                                        <del>2,500,000</del>
-                                    </div>
-                                    <div class="product-box-price-price">
-                                        <h5 class="title-font main-color-green-color h2 mb-0">799,000</h5>
-                                        <p class="mb-0 text-muted">تومان</p>
-                                    </div>
-                                </div>
-                                <div class="product-box-hover">
-                                    <nav class="navbar navbar-expand justify-content-center">
-                                        <ul class="navbar-nav align-items-center">
-                                            <li class="nav-item"><a href=""
-                                                    class="nav-item product-box-hover-item me-3">مشاهده
-                                                    محصول</a></li>
-                                            <li class="nav-item"><a href=""
-                                                    class="nav-item product-box-hover-item product-box-hover-item-btn me-1"
-                                                    data-bs-toggle="tooltip" data-bs-placement="top"
-                                                    data-bs-title="افزودن به سبد خرید"><i
-                                                        class="bi bi-basket"></i></a></li>
-                                            <li class="nav-item"><a href=""
-                                                    class="nav-item product-box-hover-item product-box-hover-item-btn"
-                                                    data-bs-toggle="tooltip" data-bs-placement="top"
-                                                    data-bs-title="افزودن به علاقه ها"><i
-                                                        class="bi bi-heart"></i></a></li>
-                                        </ul>
-                                    </nav>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="product-box">
-                            <a href="">
-                                <div class="product-box-image">
-                                    <img src="assets/img/product/television1.jpg" alt="">
-                                </div>
-                                <div class="product-box-title">
-                                    <h5 class="text-overflow-2">ساعت هوشمند شیائومی مدل Redmi Watch 2 Lite طرح بند
-                                        سلیکونی
-                                    </h5>
-                                </div>
-                                <div class="product-box-price">
-                                    <div class="product-box-price-discount">
-                                        <span class="d-block badge main-color-one-bg text-white font-14 rounded-pill">25%</span>
-                                        <del>2,500,000</del>
-                                    </div>
-                                    <div class="product-box-price-price">
-                                        <h5 class="title-font main-color-green-color h2 mb-0">799,000</h5>
-                                        <p class="mb-0 text-muted">تومان</p>
-                                    </div>
-                                </div>
-                                <div class="product-box-hover">
-                                    <nav class="navbar navbar-expand justify-content-center">
-                                        <ul class="navbar-nav align-items-center">
-                                            <li class="nav-item"><a href=""
-                                                    class="nav-item product-box-hover-item me-3">مشاهده
-                                                    محصول</a></li>
-                                            <li class="nav-item"><a href=""
-                                                    class="nav-item product-box-hover-item product-box-hover-item-btn me-1"
-                                                    data-bs-toggle="tooltip" data-bs-placement="top"
-                                                    data-bs-title="افزودن به سبد خرید"><i
-                                                        class="bi bi-basket"></i></a></li>
-                                            <li class="nav-item"><a href=""
-                                                    class="nav-item product-box-hover-item product-box-hover-item-btn"
-                                                    data-bs-toggle="tooltip" data-bs-placement="top"
-                                                    data-bs-title="افزودن به علاقه ها"><i
-                                                        class="bi bi-heart"></i></a></li>
-                                        </ul>
-                                    </nav>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="product-box">
-                            <a href="">
-                                <div class="product-box-image">
-                                    <img src="assets/img/product/product-image1.jpg" alt="">
-                                </div>
-                                <div class="product-box-title">
-                                    <h5 class="text-overflow-2">ساعت هوشمند شیائومی مدل Redmi Watch 2 Lite طرح بند
-                                        سلیکونی
-                                    </h5>
-                                </div>
-                                <div class="product-box-price">
-                                    <div class="product-box-price-discount">
-                                        <span class="d-block badge main-color-one-bg text-white font-14 rounded-pill">25%</span>
-                                        <del>2,500,000</del>
-                                    </div>
-                                    <div class="product-box-price-price">
-                                        <h5 class="title-font main-color-green-color h2 mb-0">799,000</h5>
-                                        <p class="mb-0 text-muted">تومان</p>
-                                    </div>
-                                </div>
-                                <div class="product-box-hover">
-                                    <nav class="navbar navbar-expand justify-content-center">
-                                        <ul class="navbar-nav align-items-center">
-                                            <li class="nav-item"><a href=""
-                                                    class="nav-item product-box-hover-item me-3">مشاهده
-                                                    محصول</a></li>
-                                            <li class="nav-item"><a href=""
-                                                    class="nav-item product-box-hover-item product-box-hover-item-btn me-1"
-                                                    data-bs-toggle="tooltip" data-bs-placement="top"
-                                                    data-bs-title="افزودن به سبد خرید"><i
-                                                        class="bi bi-basket"></i></a></li>
-                                            <li class="nav-item"><a href=""
-                                                    class="nav-item product-box-hover-item product-box-hover-item-btn"
-                                                    data-bs-toggle="tooltip" data-bs-placement="top"
-                                                    data-bs-title="افزودن به علاقه ها"><i
-                                                        class="bi bi-heart"></i></a></li>
-                                        </ul>
-                                    </nav>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="product-box">
-                            <a href="">
-                                <div class="product-box-image">
-                                    <img src="assets/img/product/product-image3.jpg" alt="">
-                                </div>
-                                <div class="product-box-title">
-                                    <h5 class="text-overflow-2">ساعت هوشمند شیائومی مدل Redmi Watch 2 Lite طرح بند
-                                        سلیکونی
-                                    </h5>
-                                </div>
-                                <div class="product-box-price">
-                                    <div class="product-box-price-discount">
-                                        <span class="d-block badge main-color-one-bg text-white font-14 rounded-pill">25%</span>
-                                        <del>2,500,000</del>
-                                    </div>
-                                    <div class="product-box-price-price">
-                                        <h5 class="title-font main-color-green-color h2 mb-0">799,000</h5>
-                                        <p class="mb-0 text-muted">تومان</p>
-                                    </div>
-                                </div>
-                                <div class="product-box-hover">
-                                    <nav class="navbar navbar-expand justify-content-center">
-                                        <ul class="navbar-nav align-items-center">
-                                            <li class="nav-item"><a href=""
-                                                    class="nav-item product-box-hover-item me-3">مشاهده
-                                                    محصول</a></li>
-                                            <li class="nav-item"><a href=""
-                                                    class="nav-item product-box-hover-item product-box-hover-item-btn me-1"
-                                                    data-bs-toggle="tooltip" data-bs-placement="top"
-                                                    data-bs-title="افزودن به سبد خرید"><i
-                                                        class="bi bi-basket"></i></a></li>
-                                            <li class="nav-item"><a href=""
-                                                    class="nav-item product-box-hover-item product-box-hover-item-btn"
-                                                    data-bs-toggle="tooltip" data-bs-placement="top"
-                                                    data-bs-title="افزودن به علاقه ها"><i
-                                                        class="bi bi-heart"></i></a></li>
-                                        </ul>
-                                    </nav>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="product-box">
-                            <a href="">
-                                <div class="product-box-image">
-                                    <img src="assets/img/product/product-image6.jpg" alt="">
-                                </div>
-                                <div class="product-box-title">
-                                    <h5 class="text-overflow-2">ساعت هوشمند شیائومی مدل Redmi Watch 2 Lite طرح بند
-                                        سلیکونی
-                                    </h5>
-                                </div>
-                                <div class="product-box-price">
-                                    <div class="product-box-price-discount">
-                                        <span class="d-block badge main-color-one-bg text-white font-14 rounded-pill">25%</span>
-                                        <del>2,500,000</del>
-                                    </div>
-                                    <div class="product-box-price-price">
-                                        <h5 class="title-font main-color-green-color h2 mb-0">799,000</h5>
-                                        <p class="mb-0 text-muted">تومان</p>
-                                    </div>
-                                </div>
-                                <div class="product-box-hover">
-                                    <nav class="navbar navbar-expand justify-content-center">
-                                        <ul class="navbar-nav align-items-center">
-                                            <li class="nav-item"><a href=""
-                                                    class="nav-item product-box-hover-item me-3">مشاهده
-                                                    محصول</a></li>
-                                            <li class="nav-item"><a href=""
-                                                    class="nav-item product-box-hover-item product-box-hover-item-btn me-1"
-                                                    data-bs-toggle="tooltip" data-bs-placement="top"
-                                                    data-bs-title="افزودن به سبد خرید"><i
-                                                        class="bi bi-basket"></i></a></li>
-                                            <li class="nav-item"><a href=""
-                                                    class="nav-item product-box-hover-item product-box-hover-item-btn"
-                                                    data-bs-toggle="tooltip" data-bs-placement="top"
-                                                    data-bs-title="افزودن به علاقه ها"><i
-                                                        class="bi bi-heart"></i></a></li>
-                                        </ul>
-                                    </nav>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
+                    @empty
+                    <p>محصولی یافت نشد</p>
+                    @endforelse
+
+
 
                 </div>
 

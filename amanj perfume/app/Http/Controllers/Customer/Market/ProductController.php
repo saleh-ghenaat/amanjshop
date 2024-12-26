@@ -12,9 +12,11 @@ class ProductController extends Controller
 {
     public function product(Product $product)
     {
-        $relatedProducts = Product::all();
-        // Auth::loginUsingId(15);
-        return view('customer.market.product.product', compact('product', 'relatedProducts'));
+        $relatedProducts = Product::with('category')->whereHas('category', function ($q) use ($product) {
+            $q->where('id', $product->category->id);
+        })->get()->except($product->id);
+        $amazingProducts = Product::whereHas('amazingSales')->latest()->take(10)->get();
+        return view('customer.market.product.product', compact('product', 'relatedProducts','amazingProducts'));
     }
 
     public function addComment(Product $product, Request $request)

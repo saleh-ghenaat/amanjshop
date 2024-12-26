@@ -848,7 +848,7 @@
                         <div class="slider-title-title">
                             <h2 class="h1">محصولات <span class="main-color-one-color title-font">تخفیف خورده</span></h2>
                             <p class="mb-0 mt-2 h5 text-muted">جدیدترین محصولات تخفیف خورده ما را اینجا میتوانید ببینید
-                                </p>
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -867,7 +867,7 @@
                 <div class="swiper-wrapper ">
                     @foreach($amazingProducts as $product)
                     @php
-                                    $amazingSales = $product->activeAmazingSales();
+                    $amazingSales = $product->activeAmazingSales();
 
 
                     @endphp
@@ -917,8 +917,8 @@
                                                 <form action="{{route('customer.sales-process.add-to-cart' , $product)}}" method="POST" enctype="multipart/form-data">
                                                     @csrf
                                                     <button type="submit" style="border: none;" class="nav-item product-box-hover-item product-box-hover-item-btn me-1"><i class="bi bi-basket"></i></button>
-                                                    </form>
-                                                    </li>
+                                                </form>
+                                            </li>
                                             <li class="nav-item"><a href=""
                                                     class="nav-item product-box-hover-item product-box-hover-item-btn"
                                                     data-bs-toggle="tooltip" data-bs-placement="top"
@@ -987,7 +987,7 @@
                         <div class="slider-title-title">
                             <h2 class="h1">محصولات <span class="main-color-one-color title-font">پرفروش سایت</span></h2>
                             <p class="mb-0 mt-2 h5 text-muted">پرتقاضا ترین محصولات ما را اینجا می توانید ببینید
-                                </p>
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -1031,11 +1031,11 @@
                             </div>
                             @else
                             <div class="product-box-price">
-                            <div class="product-box-price-price">
-                                <h5 class="title-font main-color-green-color h2 mb-0">{{ priceFormat($product->price) }}</h5>
-                                <p class="mb-0 text-muted">ریال</p>
+                                <div class="product-box-price-price">
+                                    <h5 class="title-font main-color-green-color h2 mb-0">{{ priceFormat($product->price) }}</h5>
+                                    <p class="mb-0 text-muted">ریال</p>
+                                </div>
                             </div>
-                        </div>
 
                             @endif
                             <div class="product-box-hover">
@@ -1048,10 +1048,10 @@
                                             <form action="{{route('customer.sales-process.add-to-cart' , $product)}}" method="POST" enctype="multipart/form-data">
                                                 @csrf
 
-                                            <button type="submit" style="border: none;" class="nav-item product-box-hover-item product-box-hover-item-btn me-1"><i class="bi bi-basket"></i></button>
+                                                <button type="submit" style="border: none;" class="nav-item product-box-hover-item product-box-hover-item-btn me-1"><i class="bi bi-basket"></i></button>
 
-                                                </form>
-                                                </li>
+                                            </form>
+                                        </li>
                                         <li class="nav-item"><a href=""
                                                 class="nav-item product-box-hover-item product-box-hover-item-btn"
                                                 data-bs-toggle="tooltip" data-bs-placement="top"
@@ -1113,10 +1113,10 @@
             <div class="row g-4">
                 @foreach($new_products as $product)
                 @php
-            $amazingSales = $product->activeAmazingSales();
+                $amazingSales = $product->activeAmazingSales();
 
 
-            @endphp
+                @endphp
                 <div class="col-lg-3 col-sm-6">
                     <div class="product-row-item">
                         <a href="">
@@ -1143,8 +1143,8 @@
                                             <form action="{{route('customer.sales-process.add-to-cart' , $product)}}" method="post" enctype="multipart/form-data">
                                                 @csrf
 
-                                            <button class="btn text-white"><i class="bi bi-basket"></i></button>
-                                        </form>
+                                                <button class="btn text-white"><i class="bi bi-basket"></i></button>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
@@ -1380,7 +1380,7 @@
         </div>
         <div class="item item-float">
             <a href="#offcanvasCart" data-bs-toggle="offcanvas" href="#offcanvasCart" role="button"
-               aria-controls="offcanvasCart">
+                aria-controls="offcanvasCart">
                 <i class="bi bi-bag font-20"></i>
             </a>
         </div>
